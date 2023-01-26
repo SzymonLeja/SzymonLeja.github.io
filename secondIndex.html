@@ -1330,8 +1330,8 @@ e = this, t = function() {
             <button onclick="window.location.href='index.html'">switch to duża</button>
             <textarea id="question" rows="5" cols="50" placeholder="Enter here a question..."></textarea>
             <div id="buttons-group">
-                <button id="clear">Clear</button>
                 <button id="search">Search</button>
+                <button id="clear">Clear</button>
             </div>
             Answers:
             <div id="answer-list">
@@ -1399,7 +1399,6 @@ function searchFunction() {
     ]
 
 
-console.log("dupa")
 var fuse = new Fuse(questions, {
 includeScore: true,
 findAllMatches: true,
@@ -1407,7 +1406,6 @@ threshold: 0.7,
 ignoreLocation: true,
 useExtendedSearch: false,
 });
-console.log("xdws")
 
 function handleQuestion(el) {
 function questionText() {
