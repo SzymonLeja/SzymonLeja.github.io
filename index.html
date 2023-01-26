@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+
+var e, t;
+e = this, t = function() {
+    "use strict";
+
+    function e(t) {
+        return (e = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(e) {
+            return typeof e
+        } : function(e) {
+            return e && "function" == typeof Symbol && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e
+        })(t)
+    }
+
+    function t(e, t) {
+        if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function")
+    }
+
+    function n(e, t) {
+        for (var n = 0; n < t.length; n++) {
+            var r = t[n];
+            r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(e, r.key, r)
+        }
+    }
+
+    function r(e, t, r) {
+        return t && n(e.prototype, t), r && n(e, r), e
+    }
+
+    function i(e, t, n) {
+        return t in e ? Object.defineProperty(e, t, {
+            value: n,
+            enumerable: !0,
+            configurable: !0,
+            writable: !0
+        }) : e[t] = n, e
+    }
+
+    function o(e, t) {
+        var n = Object.keys(e);
+        if (Object.getOwnPropertySymbols) {
+            var r = Object.getOwnPropertySymbols(e);
+            t && (r = r.filter((function(t) {
+                return Object.getOwnPropertyDescriptor(e, t).enumerable
+            }))), n.push.apply(n, r)
+        }
+        return n
+    }
+
+    function c(e) {
+        for (var t = 1; t < arguments.length; t++) {
+            var n = null != arguments[t] ? arguments[t] : {};
+            t % 2 ? o(Object(n), !0).forEach((function(t) {
+                i(e, t, n[t])
+            })) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(n)) : o(Object(n)).forEach((function(t) {
+                Object.defineProperty(e, t, Object.getOwnPropertyDescriptor(n, t))
+            }))
+        }
+        return e
+    }
+
+    function s(e, t) {
+        if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function");
+        e.prototype = Object.create(t && t.prototype, {
+            constructor: {
+                value: e,
+                writable: !0,
+                configurable: !0
+            }
+        }), t && u(e, t)
+    }
+
+    function a(e) {
+        return (a = Object.setPrototypeOf ? Object.getPrototypeOf : function(e) {
+            return e.__proto__ || Object.getPrototypeOf(e)
+        })(e)
+    }
+
+    function u(e, t) {
+        return (u = Object.setPrototypeOf || function(e, t) {
+            return e.__proto__ = t, e
+        })(e, t)
+    }
+
+    function h() {
+        if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
+        if (Reflect.construct.sham) return !1;
+        if ("function" == typeof Proxy) return !0;
+        try {
+            return Date.prototype.toString.call(Reflect.construct(Date, [], (function() {}))), !0
+        } catch (e) {
+            return !1
+        }
+    }
+
+    function f(e, t) {
+        return !t || "object" != typeof t && "function" != typeof t ? function(e) {
+            if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+            return e
+        }(e) : t
+    }
+
+    function l(e) {
+        return function() {
+            var t, n = a(e);
+            if (h()) {
+                var r = a(this).constructor;
+                t = Reflect.construct(n, arguments, r)
+            } else t = n.apply(this, arguments);
+            return f(this, t)
+        }
+    }
+
+    function d(e) {
+        return function(e) {
+            if (Array.isArray(e)) return v(e)
+        }(e) || function(e) {
+            if ("undefined" != typeof Symbol && Symbol.iterator in Object(e)) return Array.from(e)
+        }(e) || function(e, t) {
+            if (e) {
+                if ("string" == typeof e) return v(e, t);
+                var n = Object.prototype.toString.call(e).slice(8, -1);
+                return "Object" === n && e.constructor && (n = e.constructor.name), "Map" === n || "Set" === n ? Array.from(n) : "Arguments" === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n) ? v(e, t) : void 0
+            }
+        }(e) || function() {
+            throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+        }()
+    }
+
+    function v(e, t) {
+        (null == t || t > e.length) && (t = e.length);
+        for (var n = 0, r = new Array(t); n < t; n++) r[n] = e[n];
+        return r
+    }
+
+    function y(e) {
+        return Array.isArray ? Array.isArray(e) : "[object Array]" === Object.prototype.toString.call(e)
+    }
+
+    function g(e) {
+        return "string" == typeof e
+    }
+
+    function p(e) {
+        return "number" == typeof e
+    }
+
+    function m(e) {
+        return null != e
+    }
+
+    function k(e) {
+        return !e.trim().length
+    }
+    var M = function(e) {
+            return "Invalid value for key ".concat(e)
+        },
+        b = function(e) {
+            return "Pattern length exceeds max of ".concat(e, ".")
+        },
+        x = Object.prototype.hasOwnProperty,
+        S = function() {
+            function e(n) {
+                var r = this;
+                t(this, e), this._keys = {}, this._keyNames = [];
+                var i = 0;
+                n.forEach((function(e) {
+                    var t, n = 1;
+                    if (g(e)) t = e;
+                    else {
+                        if (!x.call(e, "name")) throw new Error("Missing ".concat("name", " property in key"));
+                        if (t = e.name, x.call(e, "weight") && (n = e.weight) <= 0) throw new Error(function(e) {
+                            return "Property 'weight' in key '".concat(e, "' must be a positive integer")
+                        }(t))
+                    }
+                    r._keyNames.push(t), r._keys[t] = {
+                        weight: n
+                    }, i += n
+                })), this._keyNames.forEach((function(e) {
+                    r._keys[e].weight /= i
+                }))
+            }
+            return r(e, [{
+                key: "get",
+                value: function(e, t) {
+                    return this._keys[e] && this._keys[e][t]
+                }
+            }, {
+                key: "keys",
+                value: function() {
+                    return this._keyNames
+                }
+            }, {
+                key: "toJSON",
+                value: function() {
+                    return JSON.stringify(this._keys)
+                }
+            }]), e
+        }(),
+        _ = c({}, {
+            isCaseSensitive: !1,
+            includeScore: !1,
+            keys: [],
+            shouldSort: !0,
+            sortFn: function(e, t) {
+                return e.score === t.score ? e.idx < t.idx ? -1 : 1 : e.score < t.score ? -1 : 1
+            }
+        }, {}, {
+            includeMatches: !1,
+            findAllMatches: !1,
+            minMatchCharLength: 1
+        }, {}, {
+            location: 0,
+            threshold: .6,
+            distance: 100
+        }, {}, {
+            useExtendedSearch: !1,
+            getFn: function(e, t) {
+                var n = [],
+                    r = !1;
+                return function e(t, i) {
+                    if (i) {
+                        var o = i.indexOf("."),
+                            c = i,
+                            s = null; - 1 !== o && (c = i.slice(0, o), s = i.slice(o + 1));
+                        var a = t[c];
+                        if (!m(a)) return;
+                        if (s || !g(a) && !p(a))
+                            if (y(a)) {
+                                r = !0;
+                                for (var u = 0, h = a.length; u < h; u += 1) e(a[u], s)
+                            } else s && e(a, s);
+                        else n.push(function(e) {
+                            return null == e ? "" : function(e) {
+                                if ("string" == typeof e) return e;
+                                var t = e + "";
+                                return "0" == t && 1 / e == -1 / 0 ? "-0" : t
+                            }(e)
+                        }(a))
+                    } else n.push(t)
+                }(e, t), r ? n : n[0]
+            }
+        }),
+        w = /[^ ]+/g;
+
+    function O() {
+        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 3,
+            t = new Map;
+        return {
+            get: function(n) {
+                var r = n.match(w).length;
+                if (t.has(r)) return t.get(r);
+                var i = parseFloat((1 / Math.sqrt(r)).toFixed(e));
+                return t.set(r, i), i
+            },
+            clear: function() {
+                t.clear()
+            }
+        }
+    }
+    var C = function() {
+        function e() {
+            var n = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
+                r = n.getFn,
+                i = void 0 === r ? _.getFn : r;
+            t(this, e), this.norm = O(3), this.getFn = i, this.isCreated = !1, this.setRecords()
+        }
+        return r(e, [{
+            key: "setCollection",
+            value: function() {
+                var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [];
+                this.docs = e
+            }
+        }, {
+            key: "setRecords",
+            value: function() {
+                var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [];
+                this.records = e
+            }
+        }, {
+            key: "setKeys",
+            value: function() {
+                var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [];
+                this.keys = e
+            }
+        }, {
+            key: "create",
+            value: function() {
+                var e = this;
+                !this.isCreated && this.docs.length && (this.isCreated = !0, g(this.docs[0]) ? this.docs.forEach((function(t, n) {
+                    e._addString(t, n)
+                })) : this.docs.forEach((function(t, n) {
+                    e._addObject(t, n)
+                })), this.norm.clear())
+            }
+        }, {
+            key: "add",
+            value: function(e) {
+                var t = this.size();
+                g(e) ? this._addString(e, t) : this._addObject(e, t)
+            }
+        }, {
+            key: "removeAt",
+            value: function(e) {
+                this.records.splice(e, 1);
+                for (var t = e, n = this.size(); t < n; t += 1) this.records[t].i -= 1
+            }
+        }, {
+            key: "size",
+            value: function() {
+                return this.records.length
+            }
+        }, {
+            key: "_addString",
+            value: function(e, t) {
+                if (m(e) && !k(e)) {
+                    var n = {
+                        v: e,
+                        i: t,
+                        n: this.norm.get(e)
+                    };
+                    this.records.push(n)
+                }
+            }
+        }, {
+            key: "_addObject",
+            value: function(e, t) {
+                var n = this,
+                    r = {
+                        i: t,
+                        $: {}
+                    };
+                this.keys.forEach((function(t, i) {
+                    var o = n.getFn(e, t);
+                    if (m(o))
+                        if (y(o)) ! function() {
+                            for (var e = [], t = [{
+                                    nestedArrIndex: -1,
+                                    value: o
+                                }]; t.length;) {
+                                var c = t.pop(),
+                                    s = c.nestedArrIndex,
+                                    a = c.value;
+                                if (m(a))
+                                    if (g(a) && !k(a)) {
+                                        var u = {
+                                            v: a,
+                                            i: s,
+                                            n: n.norm.get(a)
+                                        };
+                                        e.push(u)
+                                    } else y(a) && a.forEach((function(e, n) {
+                                        t.push({
+                                            nestedArrIndex: n,
+                                            value: e
+                                        })
+                                    }))
+                            }
+                            r.$[i] = e
+                        }();
+                        else if (!k(o)) {
+                        var c = {
+                            v: o,
+                            n: n.norm.get(o)
+                        };
+                        r.$[i] = c
+                    }
+                })), this.records.push(r)
+            }
+        }, {
+            key: "toJSON",
+            value: function() {
+                return {
+                    keys: this.keys,
+                    records: this.records
+                }
+            }
+        }]), e
+    }();
+
+    function L(e, t) {
+        var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {},
+            r = n.getFn,
+            i = void 0 === r ? _.getFn : r,
+            o = new C({
+                getFn: i
+            });
+        return o.setKeys(e), o.setCollection(t), o.create(), o
+    }
+
+    function j(e, t) {
+        var n = e.matches;
+        t.matches = [], m(n) && n.forEach((function(e) {
+            if (m(e.indices) && e.indices.length) {
+                var n = {
+                    indices: e.indices,
+                    value: e.value
+                };
+                e.key && (n.key = e.key), e.idx > -1 && (n.refIndex = e.idx), t.matches.push(n)
+            }
+        }))
+    }
+
+    function A(e, t) {
+        t.score = e.score
+    }
+
+    function E(e) {
+        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+            n = t.errors,
+            r = void 0 === n ? 0 : n,
+            i = t.currentLocation,
+            o = void 0 === i ? 0 : i,
+            c = t.expectedLocation,
+            s = void 0 === c ? 0 : c,
+            a = t.distance,
+            u = void 0 === a ? _.distance : a,
+            h = r / e.length,
+            f = Math.abs(s - o);
+        return u ? h + f / u : f ? 1 : h
+    }
+
+    function I() {
+        for (var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [], t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : _.minMatchCharLength, n = [], r = -1, i = -1, o = 0, c = e.length; o < c; o += 1) {
+            var s = e[o];
+            s && -1 === r ? r = o : s || -1 === r || ((i = o - 1) - r + 1 >= t && n.push([r, i]), r = -1)
+        }
+        return e[o - 1] && o - r >= t && n.push([r, o - 1]), n
+    }
+
+    function $(e) {
+        for (var t = {}, n = 0, r = e.length; n < r; n += 1) {
+            var i = e.charAt(n);
+            t[i] = (t[i] || 0) | 1 << r - n - 1
+        }
+        return t
+    }
+    var R = function() {
+            function e(n) {
+                var r = this,
+                    i = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+                    o = i.location,
+                    c = void 0 === o ? _.location : o,
+                    s = i.threshold,
+                    a = void 0 === s ? _.threshold : s,
+                    u = i.distance,
+                    h = void 0 === u ? _.distance : u,
+                    f = i.includeMatches,
+                    l = void 0 === f ? _.includeMatches : f,
+                    d = i.findAllMatches,
+                    v = void 0 === d ? _.findAllMatches : d,
+                    y = i.minMatchCharLength,
+                    g = void 0 === y ? _.minMatchCharLength : y,
+                    p = i.isCaseSensitive,
+                    m = void 0 === p ? _.isCaseSensitive : p;
+                if (t(this, e), this.options = {
+                        location: c,
+                        threshold: a,
+                        distance: h,
+                        includeMatches: l,
+                        findAllMatches: v,
+                        minMatchCharLength: g,
+                        isCaseSensitive: m
+                    }, this.pattern = m ? n : n.toLowerCase(), this.chunks = [], this.pattern.length) {
+                    var k = function(e, t) {
+                            r.chunks.push({
+                                pattern: e,
+                                alphabet: $(e),
+                                startIndex: t
+                            })
+                        },
+                        M = this.pattern.length;
+                    if (M > 32) {
+                        for (var b = 0, x = M % 32, S = M - x; b < S;) k(this.pattern.substr(b, 32), b), b += 32;
+                        if (x) {
+                            var w = M - 32;
+                            k(this.pattern.substr(w), w)
+                        }
+                    } else k(this.pattern, 0)
+                }
+            }
+            return r(e, [{
+                key: "searchIn",
+                value: function(e) {
+                    var t = this.options,
+                        n = t.isCaseSensitive,
+                        r = t.includeMatches;
+                    if (n || (e = e.toLowerCase()), this.pattern === e) {
+                        var i = {
+                            isMatch: !0,
+                            score: 0
+                        };
+                        return r && (i.indices = [
+                            [0, e.length - 1]
+                        ]), i
+                    }
+                    var o = this.options,
+                        c = o.location,
+                        s = o.distance,
+                        a = o.threshold,
+                        u = o.findAllMatches,
+                        h = o.minMatchCharLength,
+                        f = [],
+                        l = 0,
+                        v = !1;
+                    this.chunks.forEach((function(t) {
+                        var n = t.pattern,
+                            i = t.alphabet,
+                            o = t.startIndex,
+                            y = function(e, t, n) {
+                                var r = arguments.length > 3 && void 0 !== arguments[3] ? arguments[3] : {},
+                                    i = r.location,
+                                    o = void 0 === i ? _.location : i,
+                                    c = r.distance,
+                                    s = void 0 === c ? _.distance : c,
+                                    a = r.threshold,
+                                    u = void 0 === a ? _.threshold : a,
+                                    h = r.findAllMatches,
+                                    f = void 0 === h ? _.findAllMatches : h,
+                                    l = r.minMatchCharLength,
+                                    d = void 0 === l ? _.minMatchCharLength : l,
+                                    v = r.includeMatches,
+                                    y = void 0 === v ? _.includeMatches : v;
+                                if (t.length > 32) throw new Error(b(32));
+                                var g, p = t.length,
+                                    m = e.length,
+                                    k = Math.max(0, Math.min(o, m)),
+                                    M = u,
+                                    x = k,
+                                    S = [];
+                                if (y)
+                                    for (var w = 0; w < m; w += 1) S[w] = 0;
+                                for (;
+                                    (g = e.indexOf(t, x)) > -1;) {
+                                    var O = E(t, {
+                                        currentLocation: g,
+                                        expectedLocation: k,
+                                        distance: s
+                                    });
+                                    if (M = Math.min(O, M), x = g + p, y)
+                                        for (var C = 0; C < p;) S[g + C] = 1, C += 1
+                                }
+                                x = -1;
+                                for (var L = [], j = 1, A = p + m, $ = 1 << p - 1, R = 0; R < p; R += 1) {
+                                    for (var P = 0, F = A; P < F;) {
+                                        var N = E(t, {
+                                            errors: R,
+                                            currentLocation: k + F,
+                                            expectedLocation: k,
+                                            distance: s
+                                        });
+                                        N <= M ? P = F : A = F, F = Math.floor((A - P) / 2 + P)
+                                    }
+                                    A = F;
+                                    var D = Math.max(1, k - F + 1),
+                                        z = f ? m : Math.min(k + F, m) + p,
+                                        q = Array(z + 2);
+                                    q[z + 1] = (1 << R) - 1;
+                                    for (var W = z; W >= D; W -= 1) {
+                                        var J = W - 1,
+                                            K = n[e.charAt(J)];
+                                        if (K && y && (S[J] = 1), q[W] = (q[W + 1] << 1 | 1) & K, 0 !== R && (q[W] |= (L[W + 1] | L[W]) << 1 | 1 | L[W + 1]), q[W] & $ && (j = E(t, {
+                                                errors: R,
+                                                currentLocation: J,
+                                                expectedLocation: k,
+                                                distance: s
+                                            })) <= M) {
+                                            if (M = j, (x = J) <= k) break;
+                                            D = Math.max(1, 2 * k - x)
+                                        }
+                                    }
+                                    var T = E(t, {
+                                        errors: R + 1,
+                                        currentLocation: k,
+                                        expectedLocation: k,
+                                        distance: s
+                                    });
+                                    if (T > M) break;
+                                    L = q
+                                }
+                                var U = {
+                                    isMatch: x >= 0,
+                                    score: Math.max(.001, j)
+                                };
+                                return y && (U.indices = I(S, d)), U
+                            }(e, n, i, {
+                                location: c + o,
+                                distance: s,
+                                threshold: a,
+                                findAllMatches: u,
+                                minMatchCharLength: h,
+                                includeMatches: r
+                            }),
+                            g = y.isMatch,
+                            p = y.score,
+                            m = y.indices;
+                        g && (v = !0), l += p, g && m && (f = [].concat(d(f), d(m)))
+                    }));
+                    var y = {
+                        isMatch: v,
+                        score: v ? l / this.chunks.length : 1
+                    };
+                    return v && r && (y.indices = f), y
+                }
+            }]), e
+        }(),
+        P = function() {
+            function e(n) {
+                t(this, e), this.pattern = n
+            }
+            return r(e, [{
+                key: "search",
+                value: function() {}
+            }], [{
+                key: "isMultiMatch",
+                value: function(e) {
+                    return F(e, this.multiRegex)
+                }
+            }, {
+                key: "isSingleMatch",
+                value: function(e) {
+                    return F(e, this.singleRegex)
+                }
+            }]), e
+        }();
+
+    function F(e, t) {
+        var n = e.match(t);
+        return n ? n[1] : null
+    }
+    var N = function(e) {
+            s(i, e);
+            var n = l(i);
+
+            function i(e) {
+                return t(this, i), n.call(this, e)
+            }
+            return r(i, [{
+                key: "search",
+                value: function(e) {
+                    for (var t, n = 0, r = [], i = this.pattern.length;
+                        (t = e.indexOf(this.pattern, n)) > -1;) n = t + i, r.push([t, n - 1]);
+                    var o = !!r.length;
+                    return {
+                        isMatch: o,
+                        score: o ? 1 : 0,
+                        indices: r
+                    }
+                }
+            }], [{
+                key: "type",
+                get: function() {
+                    return "exact"
+                }
+            }, {
+                key: "multiRegex",
+                get: function() {
+                    return /^'"(.*)"$/
+                }
+            }, {
+                key: "singleRegex",
+                get: function() {
+                    return /^'(.*)$/
+                }
+            }]), i
+        }(P),
+        D = function(e) {
+            s(i, e);
+            var n = l(i);
+
+            function i(e) {
+                return t(this, i), n.call(this, e)
+            }
+            return r(i, [{
+                key: "search",
+                value: function(e) {
+                    var t = -1 === e.indexOf(this.pattern);
+                    return {
+                        isMatch: t,
+                        score: t ? 0 : 1,
+                        indices: [0, e.length - 1]
+                    }
+                }
+            }], [{
+                key: "type",
+                get: function() {
+                    return "inverse-exact"
+                }
+            }, {
+                key: "multiRegex",
+                get: function() {
+                    return /^!"(.*)"$/
+                }
+            }, {
+                key: "singleRegex",
+                get: function() {
+                    return /^!(.*)$/
+                }
+            }]), i
+        }(P),
+        z = function(e) {
+            s(i, e);
+            var n = l(i);
+
+            function i(e) {
+                return t(this, i), n.call(this, e)
+            }
+            return r(i, [{
+                key: "search",
+                value: function(e) {
+                    var t = e.startsWith(this.pattern);
+                    return {
+                        isMatch: t,
+                        score: t ? 0 : 1,
+                        indices: [0, this.pattern.length - 1]
+                    }
+                }
+            }], [{
+                key: "type",
+                get: function() {
+                    return "prefix-exact"
+                }
+            }, {
+                key: "multiRegex",
+                get: function() {
+                    return /^\^"(.*)"$/
+                }
+            }, {
+                key: "singleRegex",
+                get: function() {
+                    return /^\^(.*)$/
+                }
+            }]), i
+        }(P),
+        q = function(e) {
+            s(i, e);
+            var n = l(i);
+
+            function i(e) {
+                return t(this, i), n.call(this, e)
+            }
+            return r(i, [{
+                key: "search",
+                value: function(e) {
+                    var t = !e.startsWith(this.pattern);
+                    return {
+                        isMatch: t,
+                        score: t ? 0 : 1,
+                        indices: [0, e.length - 1]
+                    }
+                }
+            }], [{
+                key: "type",
+                get: function() {
+                    return "inverse-prefix-exact"
+                }
+            }, {
+                key: "multiRegex",
+                get: function() {
+                    return /^!\^"(.*)"$/
+                }
+            }, {
+                key: "singleRegex",
+                get: function() {
+                    return /^!\^(.*)$/
+                }
+            }]), i
+        }(P),
+        W = function(e) {
+            s(i, e);
+            var n = l(i);
+
+            function i(e) {
+                return t(this, i), n.call(this, e)
+            }
+            return r(i, [{
+                key: "search",
+                value: function(e) {
+                    var t = e.endsWith(this.pattern);
+                    return {
+                        isMatch: t,
+                        score: t ? 0 : 1,
+                        indices: [e.length - this.pattern.length, e.length - 1]
+                    }
+                }
+            }], [{
+                key: "type",
+                get: function() {
+                    return "suffix-exact"
+                }
+            }, {
+                key: "multiRegex",
+                get: function() {
+                    return /^"(.*)"\$$/
+                }
+            }, {
+                key: "singleRegex",
+                get: function() {
+                    return /^(.*)\$$/
+                }
+            }]), i
+        }(P),
+        J = function(e) {
+            s(i, e);
+            var n = l(i);
+
+            function i(e) {
+                return t(this, i), n.call(this, e)
+            }
+            return r(i, [{
+                key: "search",
+                value: function(e) {
+                    var t = !e.endsWith(this.pattern);
+                    return {
+                        isMatch: t,
+                        score: t ? 0 : 1,
+                        indices: [0, e.length - 1]
+                    }
+                }
+            }], [{
+                key: "type",
+                get: function() {
+                    return "inverse-suffix-exact"
+                }
+            }, {
+                key: "multiRegex",
+                get: function() {
+                    return /^!"(.*)"\$$/
+                }
+            }, {
+                key: "singleRegex",
+                get: function() {
+                    return /^!(.*)\$$/
+                }
+            }]), i
+        }(P),
+        K = function(e) {
+            s(i, e);
+            var n = l(i);
+
+            function i(e) {
+                var r, o = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+                    c = o.location,
+                    s = void 0 === c ? _.location : c,
+                    a = o.threshold,
+                    u = void 0 === a ? _.threshold : a,
+                    h = o.distance,
+                    f = void 0 === h ? _.distance : h,
+                    l = o.includeMatches,
+                    d = void 0 === l ? _.includeMatches : l,
+                    v = o.findAllMatches,
+                    y = void 0 === v ? _.findAllMatches : v,
+                    g = o.minMatchCharLength,
+                    p = void 0 === g ? _.minMatchCharLength : g,
+                    m = o.isCaseSensitive,
+                    k = void 0 === m ? _.isCaseSensitive : m;
+                return t(this, i), (r = n.call(this, e))._bitapSearch = new R(e, {
+                    location: s,
+                    threshold: u,
+                    distance: f,
+                    includeMatches: d,
+                    findAllMatches: y,
+                    minMatchCharLength: p,
+                    isCaseSensitive: k
+                }), r
+            }
+            return r(i, [{
+                key: "search",
+                value: function(e) {
+                    return this._bitapSearch.searchIn(e)
+                }
+            }], [{
+                key: "type",
+                get: function() {
+                    return "fuzzy"
+                }
+            }, {
+                key: "multiRegex",
+                get: function() {
+                    return /^"(.*)"$/
+                }
+            }, {
+                key: "singleRegex",
+                get: function() {
+                    return /^(.*)$/
+                }
+            }]), i
+        }(P),
+        T = [N, z, q, J, W, D, K],
+        U = T.length,
+        B = / +(?=([^\"]*\"[^\"]*\")*[^\"]*$)/;
+
+    function G(e) {
+        var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
+        return e.split("|").map((function(e) {
+            for (var n = e.trim().split(B).filter((function(e) {
+                    return e && !!e.trim()
+                })), r = [], i = 0, o = n.length; i < o; i += 1) {
+                for (var c = n[i], s = !1, a = -1; !s && ++a < U;) {
+                    var u = T[a],
+                        h = u.isMultiMatch(c);
+                    h && (r.push(new u(h, t)), s = !0)
+                }
+                if (!s)
+                    for (a = -1; ++a < U;) {
+                        var f = T[a],
+                            l = f.isSingleMatch(c);
+                        if (l) {
+                            r.push(new f(l, t));
+                            break
+                        }
+                    }
+            }
+            return r
+        }))
+    }
+    var H = new Set([K.type, N.type]),
+        Q = function() {
+            function e(n) {
+                var r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+                    i = r.isCaseSensitive,
+                    o = void 0 === i ? _.isCaseSensitive : i,
+                    c = r.includeMatches,
+                    s = void 0 === c ? _.includeMatches : c,
+                    a = r.minMatchCharLength,
+                    u = void 0 === a ? _.minMatchCharLength : a,
+                    h = r.findAllMatches,
+                    f = void 0 === h ? _.findAllMatches : h,
+                    l = r.location,
+                    d = void 0 === l ? _.location : l,
+                    v = r.threshold,
+                    y = void 0 === v ? _.threshold : v,
+                    g = r.distance,
+                    p = void 0 === g ? _.distance : g;
+                t(this, e), this.query = null, this.options = {
+                    isCaseSensitive: o,
+                    includeMatches: s,
+                    minMatchCharLength: u,
+                    findAllMatches: f,
+                    location: d,
+                    threshold: y,
+                    distance: p
+                }, this.pattern = o ? n : n.toLowerCase(), this.query = G(this.pattern, this.options)
+            }
+            return r(e, [{
+                key: "searchIn",
+                value: function(e) {
+                    var t = this.query;
+                    if (!t) return {
+                        isMatch: !1,
+                        score: 1
+                    };
+                    var n = this.options,
+                        r = n.includeMatches;
+                    e = n.isCaseSensitive ? e : e.toLowerCase();
+                    for (var i = 0, o = [], c = 0, s = 0, a = t.length; s < a; s += 1) {
+                        var u = t[s];
+                        o.length = 0, i = 0;
+                        for (var h = 0, f = u.length; h < f; h += 1) {
+                            var l = u[h],
+                                v = l.search(e),
+                                y = v.isMatch,
+                                g = v.indices,
+                                p = v.score;
+                            if (!y) {
+                                c = 0, i = 0, o.length = 0;
+                                break
+                            }
+                            if (i += 1, c += p, r) {
+                                var m = l.constructor.type;
+                                H.has(m) ? o = [].concat(d(o), d(g)) : o.push(g)
+                            }
+                        }
+                        if (i) {
+                            var k = {
+                                isMatch: !0,
+                                score: c / i
+                            };
+                            return r && (k.indices = o), k
+                        }
+                    }
+                    return {
+                        isMatch: !1,
+                        score: 1
+                    }
+                }
+            }], [{
+                key: "condition",
+                value: function(e, t) {
+                    return t.useExtendedSearch
+                }
+            }]), e
+        }(),
+        V = [];
+
+    function X(e, t) {
+        for (var n = 0, r = V.length; n < r; n += 1) {
+            var i = V[n];
+            if (i.condition(e, t)) return new i(e, t)
+        }
+        return new R(e, t)
+    }
+    var Y = "$and",
+        Z = "$or",
+        ee = function(e) {
+            return !(!e[Y] && !e[Z])
+        },
+        te = function(t) {
+            return !y(t) && "object" === e(t) && !ee(t)
+        },
+        ne = function(e) {
+            return i({}, Y, Object.keys(e).map((function(t) {
+                return i({}, t, e[t])
+            })))
+        },
+        re = function() {
+            function e(n) {
+                var r = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+                    i = arguments.length > 2 ? arguments[2] : void 0;
+                t(this, e), this.options = c({}, _, {}, r), this.options.useExtendedSearch, this._keyStore = new S(this.options.keys), this.setCollection(n, i)
+            }
+            return r(e, [{
+                key: "setCollection",
+                value: function(e, t) {
+                    if (this._docs = e, t && !(t instanceof C)) throw new Error("Incorrect 'index' type");
+                    this._myIndex = t || L(this._keyStore.keys(), this._docs, {
+                        getFn: this.options.getFn
+                    })
+                }
+            }, {
+                key: "add",
+                value: function(e) {
+                    m(e) && (this._docs.push(e), this._myIndex.add(e))
+                }
+            }, {
+                key: "removeAt",
+                value: function(e) {
+                    this._docs.splice(e, 1), this._myIndex.removeAt(e)
+                }
+            }, {
+                key: "getIndex",
+                value: function() {
+                    return this._myIndex
+                }
+            }, {
+                key: "search",
+                value: function(e) {
+                    var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+                        n = t.limit,
+                        r = void 0 === n ? -1 : n,
+                        i = this.options,
+                        o = i.includeMatches,
+                        c = i.includeScore,
+                        s = i.shouldSort,
+                        a = i.sortFn,
+                        u = g(e) ? g(this._docs[0]) ? this._searchStringList(e) : this._searchObjectList(e) : this._searchLogical(e);
+                    return ie(u, this._keyStore), s && u.sort(a), p(r) && r > -1 && (u = u.slice(0, r)), oe(u, this._docs, {
+                        includeMatches: o,
+                        includeScore: c
+                    })
+                }
+            }, {
+                key: "_searchStringList",
+                value: function(e) {
+                    var t = X(e, this.options),
+                        n = this._myIndex.records,
+                        r = [];
+                    return n.forEach((function(e) {
+                        var n = e.v,
+                            i = e.i,
+                            o = e.n;
+                        if (m(n)) {
+                            var c = t.searchIn(n),
+                                s = c.isMatch,
+                                a = c.score,
+                                u = c.indices;
+                            s && r.push({
+                                item: n,
+                                idx: i,
+                                matches: [{
+                                    score: a,
+                                    value: n,
+                                    norm: o,
+                                    indices: u
+                                }]
+                            })
+                        }
+                    })), r
+                }
+            }, {
+                key: "_searchLogical",
+                value: function(e) {
+                    var t = this,
+                        n = function(e, t) {
+                            var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {},
+                                r = n.auto,
+                                i = void 0 === r || r,
+                                o = function e(n) {
+                                    var r = Object.keys(n);
+                                    if (r.length > 1 && !ee(n)) return e(ne(n));
+                                    var o = r[0];
+                                    if (te(n)) {
+                                        var c = n[o];
+                                        if (!g(c)) throw new Error(M(o));
+                                        var s = {
+                                            key: o,
+                                            pattern: c
+                                        };
+                                        return i && (s.searcher = X(c, t)), s
+                                    }
+                                    var a = {
+                                        children: [],
+                                        operator: o
+                                    };
+                                    return r.forEach((function(t) {
+                                        var r = n[t];
+                                        y(r) && r.forEach((function(t) {
+                                            a.children.push(e(t))
+                                        }))
+                                    })), a
+                                };
+                            return ee(e) || (e = ne(e)), o(e)
+                        }(e, this.options),
+                        r = this._myIndex,
+                        i = r.keys,
+                        o = r.records,
+                        c = {},
+                        s = [];
+                    return o.forEach((function(e) {
+                        var r = e.$,
+                            o = e.i;
+                        m(r) && function e(n, r, o) {
+                            if (!n.children) {
+                                var a = n.key,
+                                    u = n.searcher,
+                                    h = r[i.indexOf(a)];
+                                return t._findMatches({
+                                    key: a,
+                                    value: h,
+                                    searcher: u
+                                })
+                            }
+                            for (var f = n.operator, l = [], v = 0; v < n.children.length; v += 1) {
+                                var y = e(n.children[v], r, o);
+                                if (y && y.length) {
+                                    if (l.push({
+                                            idx: o,
+                                            item: r,
+                                            matches: y
+                                        }), f === Z) break
+                                } else if (f === Y) {
+                                    l.length = 0;
+                                    break
+                                }
+                            }
+                            l.length && (c[o] || (c[o] = {
+                                idx: o,
+                                item: r,
+                                matches: []
+                            }, s.push(c[o])), l.forEach((function(e) {
+                                var t, n = e.matches;
+                                (t = c[o].matches).push.apply(t, d(n))
+                            })))
+                        }(n, r, o)
+                    })), s
+                }
+            }, {
+                key: "_searchObjectList",
+                value: function(e) {
+                    var t = this,
+                        n = X(e, this.options),
+                        r = this._myIndex,
+                        i = r.keys,
+                        o = r.records,
+                        c = [];
+                    return o.forEach((function(e) {
+                        var r = e.$,
+                            o = e.i;
+                        if (m(r)) {
+                            var s = [];
+                            i.forEach((function(e, i) {
+                                s.push.apply(s, d(t._findMatches({
+                                    key: e,
+                                    value: r[i],
+                                    searcher: n
+                                })))
+                            })), s.length && c.push({
+                                idx: o,
+                                item: r,
+                                matches: s
+                            })
+                        }
+                    })), c
+                }
+            }, {
+                key: "_findMatches",
+                value: function(e) {
+                    var t = e.key,
+                        n = e.value,
+                        r = e.searcher;
+                    if (!m(n)) return [];
+                    var i = [];
+                    if (y(n)) n.forEach((function(e) {
+                        var n = e.v,
+                            o = e.i,
+                            c = e.n;
+                        if (m(n)) {
+                            var s = r.searchIn(n),
+                                a = s.isMatch,
+                                u = s.score,
+                                h = s.indices;
+                            a && i.push({
+                                score: u,
+                                key: t,
+                                value: n,
+                                idx: o,
+                                norm: c,
+                                indices: h
+                            })
+                        }
+                    }));
+                    else {
+                        var o = n.v,
+                            c = n.n,
+                            s = r.searchIn(o),
+                            a = s.isMatch,
+                            u = s.score,
+                            h = s.indices;
+                        a && i.push({
+                            score: u,
+                            key: t,
+                            value: o,
+                            norm: c,
+                            indices: h
+                        })
+                    }
+                    return i
+                }
+            }]), e
+        }();
+
+    function ie(e, t) {
+        e.forEach((function(e) {
+            var n = 1;
+            e.matches.forEach((function(e) {
+                var r = e.key,
+                    i = e.norm,
+                    o = e.score,
+                    c = t.get(r, "weight");
+                n *= Math.pow(0 === o && c ? Number.EPSILON : o, (c || 1) * i)
+            })), e.score = n
+        }))
+    }
+
+    function oe(e, t) {
+        var n = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {},
+            r = n.includeMatches,
+            i = void 0 === r ? _.includeMatches : r,
+            o = n.includeScore,
+            c = void 0 === o ? _.includeScore : o,
+            s = [];
+        return i && s.push(j), c && s.push(A), e.map((function(e) {
+            var n = e.idx,
+                r = {
+                    item: t[n],
+                    refIndex: n
+                };
+            return s.length && s.forEach((function(t) {
+                t(e, r)
+            })), r
+        }))
+    }
+    return re.version = "6.0.4", re.createIndex = L, re.parseIndex = function(e) {
+            var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+                n = t.getFn,
+                r = void 0 === n ? _.getFn : n,
+                i = e.keys,
+                o = e.records,
+                c = new C({
+                    getFn: r
+                });
+            return c.setKeys(i), c.setRecords(o), c
+        }, re.config = _,
+        function() {
+            V.push.apply(V, arguments)
+        }(Q), re
+}, "object" == typeof exports && "undefined" != typeof module ? module.exports = t() : "function" == typeof define && define.amd ? define(t) : (e = e || self).Fuse = t();
+
+</script>
+<style>
+    html,
+    body {
+        margin: 0;
+        width: "100vw";
+        height: "100vh";
+    }
+
+    body {
+        background-color: rgb(243, 124, 124);
+    }
+
+    #container {
+        display: flex;
+        justify-content: center;
+        padding: 5rem;
+    }
+
+    #buttons-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+    }
+    #question {
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div id="container">
+        <div>
+            <textarea id="question" rows="5" cols="50" placeholder="Enter here a question..."></textarea>
+            <div id="buttons-group">
+                <button id="clear">Clear</button>
+                <button id="search">Search</button>
+            </div>
+            Answers:
+            <div id="answer-list">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+const buttonSearch = document.querySelector('#search');
+buttonSearch.addEventListener("click", searchFunction);
+
+function searchFunction() {
+    clearAnswers(); 
+    var questions = ["\nAlgorytm FIFO zastępowania stron pamięci\n[ ] Gwarantuje najkrótszy czas dostępu do pamięci\n[ ] Gwarantuje najmniejszą możliwą liczbę błędów stron\n[ ] Polega na usuwaniu stron, które najdawniej były używane	\n[x] Polega na usuwaniu stron, które najdłużej przebywały w pamięci fizycznej\n[ ] Zapewnia, że liczba błędów stron (dla tych samych procesów) nie zwiększy się, gdy doinstalujemy (udostępnimy) dodatkowe ramki pamięci fizycznej",
+            "\nAlgorytm LRU (najdawniej używana) zastępowania stron pamięci wirtualnej\n[ ] Gwarantuje najmniejszą możliwą liczbę błędów stron\n[ ] Polega na usuwaniu najdawniej załadowanych stron\n[ ] Polega na usuwaniu najdłużej załadowanych stron\n[ x] Polega na usuwaniu stron, które najdłużej nie były używane\n[ ] Polega na usuwaniu stron, które najdłużej przebywały w pamięci fizycznej\n[x] Zapewnia dobre dostosowanie do zestawu roboczego stron\n[ ] Zapewnia zawsze najmniejszą liczbę błędów stron (w porównaniu z innymi algorytmami)\n[x] Zapewnia, ze liczba błędów stron (dla tych samych procesów) nie zwiększy sie, gdy doinstalujemy (udostępnimy) dodatkowe ramki pamięci fizycznej",
+            "\nAlgorytm karuzelowy przełączania procesów\n[ ] Jest algorytmem bez wywłaszczania\n[ ] Jest algorytmem optymalnym, w praktyce niemożliwym do zrealizowania\n[x] Jest algorytmem z wywłaszczeniem\n[ ] Jest najczęściej wykorzystywanym algorytmem w różnych wersjach systemu operacyjnego Unix\n[x] Polega na uruchamianiu procesów na stały kwant czasu i wymuszaniu przełączania kontekstu, jeżeli proces nie zwolni procesora w tym czasie\n[ ] Przełącza procesy według dynamicznie zmienianego priorytetu",
+            "\nAlgorytm karuzelowy\n[ ] Jest algorytmem bez priorytetów\n[ ] Jest algorytmem z priorytetami dynamicznymi\n[ ] Nie pozwala wywłaszczać procesów systemowych\n[ ] Pozwala wywłaszczać procesy użytkownika\n[x] Zapewnia wszystkim procesom ten sam priorytet\n[ ] Zmienia priorytety procesom zablokowanym",
+            "\nAlgorytm przełączania procesów w systemie Unix\n[x] Jest algorytmem priorytetowym, w którym priorytet jest wewnętrznie zmieniany w trakcie wykonywania procesu\n[x] Jest algorytmem z wywłaszczeniem\n[ ] Jest algorytmem z wywłaszczeniem procesów systemowych i użytkowych\n[x] Jest algorytmem ze stałym priorytetem zewnętrznym, zadawanym komenda/funkcja nice\n[x] Jest algorytmem, w którym wywłaszczane sa tylko procesy użytkownika\n[x] Opiera sie na priorytecie dynamicznym, obniżanym dla procesów intensywnych obliczeniowo, a podwyższanym dla procesów interakcyjnych\n[ ] Opiera sie na priorytecie statycznym, wyliczanym w oparciu o wykorzystanie procesora przez proces\n[x] Pozwala modyfikować priorytet procesu przy pomocy funkcji nice\n[ ] jest algorytmem bez wywłaszczeń",
+            "\nAlgorytmy przełączania procesów z wywłaszczaniem\n[x] Mogą wykorzystywać priorytety stałe lub zmieniające się dynamicznie\n[x] Polegają na uruchamianiu procesów na stały kwant czasu i wymuszaniu przełączenia kontekstu, jeżeli proces nie zwolni procesora w tym czasie\n[ ] Zwiększają współczynnik wykorzystania procesora w systemach wielodostępnych",
+            "\nBezpośredni dostęp do pliku (zrandomizowany)\n[x] jest możliwy tylko w plikach z rekordami stałej długości\n[x] pozwala na występowanie plików nieciągłych, wewnątrz których mogą wystąpić niezaalokowane obszary\n[ ] wymaga zmiany kolejności rekordów w pliku w celu optymalizacji czasu dostępu",
+            "\nBezpośredni==swobodny dostęp do\n[ ] Blokuje równoczesny dostęp wielu procesów do pliku\n[x] Jest możliwy tylko w plikach z rekordami stałej długości\n[x] Pozwala czytać rekordy w dowolnej kolejności dzięki operacji lseek\n[x] Pozwala na występowanie plików nieciągłych, wewnątrz których mogą wystąpić niezaalokowane obszary\n[x] Pozwala na występowanie plików nieciągłych, z niezaalokowanymi dziurami\n[ ] Pozwala na zapis fragmentów różnych plików do wspólnego bloku alokacji\n[ ] Szereguje dostęp wielu procesów do pliku\n[ ] Wymaga zmiany kolejności rekordów w pliku w celu optymalizacji czas dostępu",
+            "\nBiblioteki łączone dynamicznie (DDL)\n[ ] Kopiowane są w całości do plików wykonywalnych, zawierających programy z nich korzystające\n[ ] Udostępniają wyłącznie funkcje wielowejściowe (reentrant)\n[ ] Zawierają tylko funkcje systemowe, dołączane do jądra SO\n[x] Ładowane są do pamięci tylko funkcje, do których wystąpi odwołanie\n[ x] Ładowane są w całości do pamięci, gdy uruchomiany jest program z nich korzystający (jeżeli już nie są w pamięci)",
+            "\nBlokada systemu (deadlock)\n[ ] Można ją usunąć przez czasowe zablokowanie dostępu użytkowników do systemu\n[x] Można ją usunąć przez wymuszenie zakończenia wszystkich procesów uśpionych\n[ ] Występuje tylko w systemach operacyjnych napisanych z błędami\n[ ] Występuje, gdy dwa procesy próbują równocześnie pisać do tego gniazda sieciowego\n[ ] Występuje, gdy dwa procesy próbują równocześnie pisać do tego samego pliku\n[x] występuje tylko w systemach operacyjnych wieloprogramowych",
+            "\nBloki alokacji (klastry) w systemie plików\n[x] Dobierane są tak, aby zminimalizować fragmentację wewnętrzną\n[x] Numerowane są liczbami binarnymi stałej długości, co ogranicza ich liczbę\n[ ] Powinny być jak największe, aby było ich w systemie niewiele\n[ ] Sa zawsze wielkości dwóch rekordów fizycznych (sektorów) na dysku\n[x] Są stałej wielkości w całym systemie plików",
+            "\nBuforowanie operacji dyskowych w systemie Unix:\n[ ] Eliminuje fragmentację wewnętrzną w systemie plików\n[x] Redukuje czas dostępu do plików oraz liczbę fizycznych operacji we/wy\n[x] Umożliwia zapis danych do pliku porcjami różnej wielkości\n[ ] Umożliwia zrównoleglenie procesów\n[ ] jest ograniczone do urządzeń z niewymiennym nośnikiem (np. twardych dysków); dostęp do plików na dyskietkach nie może być buforowany\n[x] utrudnia równoczesny dostęp do rekordów pliku przez wiele procesów (record locking)\n[ ] wymaga od programisty używania operacji ff/ush aby mieć pewność, że zmiany w pliku zostaną natychmiast zapisane na dysk",
+            "\nDowiązania symboliczne w Linuxie\n[x] Sa to pliki specjalne, które wskazują na inne obiekty w systemie plików\n[x] Są to pliki specjalne, które wskazują przy pomocy ścieżek na inne obiekty\n[ ] W Unixie muszą mieć rozszerzenie .lnk\n[x] Zawierają informacje o położeniu pliku na dysku",
+            "\nDołączenia w systemie plików (links)\n[x] Mogą być symboliczne, gdy wskazują ścieżkę dostępu do pliku właściwego, lub twarde, jeżeli powstają przez zdefiniowanie drugiej nazwy dla pliku\n[ ] Oznaczane są symbolem / w ścieżkach dostępu\n[x] Pozwalają tworzyć systemy plików o strukturze niehierarchicznej\n[ ] Są wynikiem błędów w programie i polegają na połączenie się list alokacji odpowiadających różnym plikom w tablicy FAT\n[ ] Są wynikiem błędów w programie i powstają przy wielokrotnym otwieraniu tych samych plików do zapisu\n[ ] Tworzone są przy otwieraniu plików, usuwane przy zamykaniu\n[x] Wiążą nazwy plików z INODE'ami w systemie Unix",
+            "\nDynamiczne ładowanie programu\n[ ] Można zrealizować w systemie bez stronicowania na żądanie\n[ ] Można zrealizować w systemie ze stronicowaniem na żądanie\n[ ] Polega na tworzeniu połączeń dynamicznych pomiędzy procesami\n[ ] Polega na wykorzystaniu bibliotek dołączanych w trakcie wykonywania programu\n[ ] Polega na ładowaniu funkcji bibliotecznych z nakładek programu\n[x] Polega na ładowaniu nakładek programu, gdy są potrzebne\n[ ] Wykorzystuje biblioteki statyczne\n[x] Wykorzystuje biblioteki współdzielone\n[ ] Wymaga aby funkcje biblioteczne miały nazwy zaczynające się podkreśleniem (_)\n[ ] Wymaga pamięci stronicowej\n[ ] Zmniejsza czas od wydania komendy do uruchomienia programu\n[x] Zmniejsza wielkość pliku wykonywalnego (exe)",
+            "\nDynamiczne łączenie\n[x] Można zrealizować w systemie bez stronicowania na zadanie\n[x] Można zrealizować w systemie ze stronicowaniem na zadanie\n[x] Polega na wykorzystaniu bibliotek dołączanych w trakcie wykonywania programu\n[x] Polega na ładowaniu nakładek programu, gdy sa potrzebne",
+            "\nFragmentacja wewnętrzna dysku jest wynikiem\n[ ] Braku konserwacji systemu plików (brak defragmentacji)\n[ ] Braku konserwacji systemu plików - moze byc wyeliminowana przez program defragmentujący\n[ ] Błędów programowych, np. nie zamknięcia pliku przed zakończeniem programu\n[ ] Moze byc wyeliminowana przez program defragmentujący\n[ ] Niedopasowania rozmiaru plików do wielkości obszarów wolnych (powstających przy kasowaniu plików)\n[x] Niedopasowania rozmiaru plików do wielokrotności wielkości bloków alokacji\n[x] Pozostawania niewykorzystywanych fragmentów w ostatnich blokach plików\n[x] Przydziału miejsca na dysku porcjami stałej wielkości\n[ ] Przydziału miejsca na dysku porcjami zmiennej wielkości\n[ ] braku konserwacji systemu plików — może być wyeliminowana przez program defragmentujący\n[ ] błędów programowych np. nie zamknięcia pliku przed zakończeniem programu",
+            "\nFragmentacja wewnętrzna pamięci jest\n[x] Jest wynikiem przydziału pamięci porcjami stałej wielkości\n[ ] Moze byc wyeliminowana przez relokacje programów\n[ ] Nie występuje w pamięci stronicowanej\n[ ] Niedopasowania rozmiaru segmentów pamięci do wielokrotności wielkości ramki\n[ ] Powoduje lepsze wykorzystanie miejsca w pamięci przez procesy\n[x] Przydziału pamięci porcjami stałej wielkości (stronami)\n[ ] błędów programowych np. nie zwalniania pamięci przed zakończeniem programu\n[ ] występuje jedynie w systemach z pamięcią wirtualna",
+            "\nFragmentacja zewnętrzna pamięci jest\n[x] Moze byc wyeliminowana przez relokacje programów\n[ ] Niedopasowania rozmiaru segmentów pamięci do wielokrotności wielkości ramki\n[ ] błędów programowych np. nie zwalniania pamięci przed zakończeniem programu",
+            "\nFunkcja systemowa exec w Unixie (Linuxie)\n[x] Modyfikuje kontekst wykonywanego procesu, korzystając z pliku wykonywalnego podanego w argumencie\n[ ] Tworzy nowy proces, realizujący program podany w argumencie do tej funkcji\n[ ] Tworzy nowy wątek, realizujący funkcję podaną w argumencie",
+            "\nFunkcja systemowa execve w Unixie (Linuxie)\n[ ] Tworzy nowy proces, realizujący program podany w argumencie do tej funkcji\n[ ] Tworzy nowy proces, realizujący ten sam program co proces-rodzic\n[ ] Tworzy nowy wątek, realizujący funkcję podaną w argumencie\n[x] Ładuje nowy program w miejsce obrazu pamięci procesu, który wywołał tę funkcję",
+            "\nFunkcja systemowa fork w Unicie (Linuxie)\n[ ] Tworzy nowy proces, realizujący program podany w argumencie do tej funkcji\n[x] Tworzy nowy proces, realizujący ten sam program co proces-rodzicsignal\n[ ] Tworzy nowy wątek, realizujący funkcję podaną w argumencie",
+            "\nFunkcja systemowa signal w Unixie (Linuxie)\n[ ] Tworzy nowy proces\n[ ] Wysyła komunikat do standardowego strumienia błędów\n[x] Wysyła sygnał do procesu lub grupy procesów",
+            "\nFunkcja systemowa wait w Unixie\n[ ] Może być wykonywana tylko przez proces z uprawnieniami root\n[ ] Może być wykonywana tylko przez procesy daemony\n[x] Umożliwia czekanie na zakończenie operacji sieciowych\n[x] Umożliwia czekanie na zakończenie operacji we/wy\n[ ] Zawiesza wykonywanie procesu przez zadany argumentem czas\n[x] Zawiesza wykonywanie procesu w oczekiwaniu na zakończenie procesu potomnego",
+            "\nKanał komunikacyjny z nieograniczonym buforowaniem\n[x ] Może powodować uśpienie procesu czytającego z kanału\n[ ] Może powodować uśpienie procesu piszącego do kanału\n[x] Umożliwia buforowanie operacji dyskowych",
+            "\nKanał komunikacyjny z ograniczonym buforowaniem\n[x] Może spowodować uśpienie procesu piszącego do kanału\n[ ] To technika synchronizacji dostępu do karty sieciowej przez procesy\n[x] Wykorzystywany jest do przesyłania danych pomiędzy procesami",
+            "\nKanał komunikacyjny z zerowym buforowaniem\n[x] Może powodować uśpienie procesu czytającego z kanału\n[ ] To kanał, w którym aktualnie nie ma żadnych komunikatów\n[ ] Umożliwia buforowanie operacji dyskowych",
+            "\nKatalog bieżący w Unixie\n[x] Jest plikiem zawierającym rekordy z nazwami i numerami inode'ów należących do niego plików\n[ ] Ma ograniczoną wielkość, ponieważ umieszczony jest w całości w superbloku\n[ ] Nie zawiera pozycji . i ..\n[ ] Użytkownik nie moze zmienić go, jeżeli nie ma uprawnień Root",
+            "\nKatalog główny systemu plików FAT32\n[x] Jest plikiem zawierającym rekordy z nazwami i atrybutami należących do niego plików\n[ ] Nie ma nazwy, zajmuje stały obszar na dysku (ustalany przy formatowaniu)\n[ ] Zawiera pozycję . (dowiązanie do niego samego)",
+            "\nKatalog główny systemu plików w Unixie\n[x] Jest plikiem Zawierającym rekordy z nazwami i numerami inode'ów należących do niego plików\n[x] Jest plikiem zawierającym rekordy z nazwami, innymi atrybutami i tablicami indeksowymi należących do niego plików\n[ ] Ma ograniczoną wielkość, ponieważ umieszczony jest w całości w superbloku\n[ ] Musi mieć taka sama zawartość, jak katalog do którego jest montowany\n[ ] Nie ma nazwy, definiowany jest przez zapisanie numeru jego inode'u w superbloku\n[ ] Nie ma nazwy, zajmuje stały obszar na dysku (ustalany przy formatowaniu)\n[ ] Nie ma nazwy, zajmuje zawsze to samo miejsce na partycji dysku (w systemie plików)\n[ ] Nie zawiera pozycji . (normalnie wskazującej na katalog zawierający tą pozycję)\n[ ] Nie zawiera pozycji . i .. (normalnie wskazujących na katalog bieżący i nadrzędny)\n[x ] Nie zawiera pozycji .. (normalnie wskazującej na katalog nadrzędny)\n[ ] Zawiera stałą liczbę pozycji, której nie można zmienić bez rekompilacji jądra systemu",
+            "\nKontekst procesu\n[ ] Jest odtwarzany przy każdym przełączeniu procesów\n[ ] Jest składowany, gdy proces się kończy (wykonuje exit)\n[ ] Jest to między innymi obraz pamięci procesu w chwili wstrzymania\n[ ] Jest to obraz pamięci procesu w pewnej chwili\n[x] Jest to obraz pamięci, rejestrów i zmiennych systemowych procesu w pewnej chwili\n[ ] Jest to obraz plików otwartych przez proces w pewnej chwili\n[ ] Jest zapamiętywany, gdy proces ulega zablokowaniu\n[ ] Obejmuje informacje konieczne do ustalenia procesu nadrzędnego\n[x] Obejmuje informacje konieczne do wznowienia procesu wstrzymanego\n[x] Obejmuje informacje konieczne do wznowienia procesu zablokowanego\n[ ] Obejmuje informacje konieczne do zablokowania procesu\n[ ] Określa terminal, z którego może proces korzystać\n[ ] Określa wszystkie procesy, z którymi może się komunikować\n[ ] Określa wszystkie zasoby, z których może proces korzystać\n[x] Określa zawartość rejestrów, z których proces moze korzystać\n[ ] Opisuje stan wszystkich zasobów, z których może proces korzystać\n[ ] Opisuje zależności pomiędzy współbieżnymi procesami",
+            "\nKontekst systemowy procesu\n[ ] Określa zawartość pamięci w chwili wywłaszczenia procesu\n[ ] Składowany jest w momencie usypiania lub wywłaszczania procesu\n[ ] Zawiera stan rejestrów ogólnych procesora",
+            "\nKryteriami rozwiązanie problemu sekcji krytycznej\n[x] Ograniczone czekanie - Każdy proces musi kiedyś dostać sie do sekcji\n[x] Postęp - dostęp do sekcji nie moze byc zablokowany, jeżeli nie przebywa w niej inny\n[x] Wzajemne wyłączanie - procesy muszą mieć możliwość wzajemnego blokowania",
+            "\nListy kontroli dostępu ACL w Windows NT\n[x] Pozwalają definiować grupy użytkowników\n[ ] Pozwalają definiować klucze dostępu do zasobów\n[ ] Pozwalają dziedziczyć uprawnienia dostępu z katalogu zawierającego plik\n[ ] Pozwalają ograniczać dostęp do pliku dla dowolnych grup użytkowników\n[ ] Pozwalają ograniczać dostęp do pliku dla dowolnych użytkowników\n[ ] Pozwalają rozróżniać uprawnienia do zapisu i do kasowania pliku\n[ ] Pozwalają zwiększyć uprawnienia procesu realizującego program z pliku dzięki mechanizmowi SUID\n[x] Służą do określania warunków dostępu do plików dla różnych użytkowników\n[ ] Służą do określania warunków logowania użytkowników do systemu\n[x] Umożliwiają zdefiniowanie obiektów, do których dostęp musi być odnotowany",
+            "\nMapa zajętości dysku\n[ ] Określa położenie plików na dysku\n[ ] Określa, które bloki alokacji na dysku są uszkodzone\n[x] Umożliwia zarządzanie wolnym miejscem na dysku",
+            "\nMechanizm spotkaniowy\n[x] To technika synchronizacji dostępu do pamięci współdzielonej przez procesy\n[ ] Wykorzystywany jest do negocjacji dostępu do plików\n[x] Wykorzystywany jest do przesyłania danych pomiędzy procesami",
+            "\nOchrona pamięci w systemach operacyjnych\n[x] Bazuje na przekształcaniu adresów logicznych na fizyczne, kontrolowanym przez SO\n[ ] Bazuje na szyfrowaniu zawartości pamięci\n[x] Ogranicza dostęp procesów do pamięci im nie przydzielonej\n[x] Ogranicza dostęp procesów do pamięci systemu operacyjnego\n[ ] Określa prawa dostępu procesów do folderów poczty elektronicznej\n[ ] Określa prawa dostępu procesów do pamięci dyskowej\n[ ] Określa prawa dostępu procesów do plików różnych właścicieli\n[ ] Określa prawa dostępu procesów do portów sieciowych\n[x] Uniemożliwia dostęp procesu do niezaalokowanej pamięci\n[ ] Zapewnia, że inne procesy nie mają dostępu do pamięci procesu\n[x] Zapewnia, że inne procesy nie mają dostępu do stosu procesu\n[ ] Zapewnia, że procesy nie mają dostępu do pamięci rozszerzonej (xmm)\n[ ] Zapewnia, że procesy nie zostaną zmodyfikowane w trakcie kopiowania do obszaru wymiany (swapping)\n[x] Zapewnia, że procesy użytkowe nie mogą zmodyfikować obrazu pamięci systemu oper.",
+            "\nOgólne semafory Dijkstry\n[x] Mogą blokować proces przy wykonywaniu operacji P\n[ ] Mogą blokować proces przy wykonywaniu operacji V\n[ ] Mogą powodować uśpienie procesu wykonującego operację wait (P)\n[ ] Przyjmują dowolne wartości dodatnie\n[ ] Przyjmują tylko wartości 0 lub 1\n[x] Służą do synchronizacji wykonywania procesów współbieżnych\n[ ] To technika synchronizowania procesów\n[ ] Udostępniają operację signal, wait i reset które nie mogą być przerwane przez wywłaszczenie",
+            '\nPamięć stronicowana charakteryzuje się tym, że:\n[x] Adres logiczny jest przekształcany na adres fizyczny przez odczytanie numeru ramki z tablicy stron, z pozycji odpowiadającej numerowi strony\n[x] Adres logiczny jest złożeniem numeru strony i przesunięcia względem jej początku\n[ ] Adresy logiczne sa tworzone jako suma adresu bazowego i przesunięcia\n[ ] Eliminuje fragmentację wewnętrzną pamięci\n[x] Eliminuje fragmentację zewnętrzną pamięci\n[ ] Jest technika Pozwalająca przydzielać programom więcej pamięci, niz jest fizycznie zainstalowane w systemie\n[ ] Jest techniką pozwalającą przydzielać programom pamięć blokami stałej wielkości (stronami)\n[x] Jest techniką pozwalającą przydzielać programom pamięć blokami zmiennej wielkości\n[ ] Jest techniką pozwalającą przydzielać programom więcej pamięci, niż jest fizycznie zainstalowane w systemie\n[ ] Musi być realizowana z wykorzystaniem pamięci asocjacyjnej na tablicę stron\n[x] Powoduje, ze programy maja nieliniowa przestrzeń adresowa (fizyczna TAK, logiczna NIE)\n[ ] Wymaga implementacji tablicy segmentów (sprzętowo lub programowo)\n[x] adresy fizyczne są sklejeniem pary liczb określających numer ramki stałej długości oraz przesunięcie (offset) w obrębie ramki\n[ ] jeżeli strona nie ma przydzielonej ramki fizycznej, to występuje „błąd strony"; brak przydziału jest oznaczony w tablicy stron bitem modyfikacji (modified flag)\n[ ] jeżeli strona nie ma przydzielonej ramki fizycznej, to występuje „błąd strony"; brak przydziału jest oznaczony w tablicy stron bitem ochrony (access control)\n[x] jeżeli strona nie ma przydzielonej ramki fizycznej, to występuje „błąd strony"; brak przydziału jest oznaczony w tablicy stron flagą poprawności (walid)',
+            "\nPlanowanie długoterminowe\n[x] Bezpośrednio decyduje o wyborze procesów, które należy wczytać do pamięci\n[x] Kolejkuje procesy nowo utworzone\n[ ] Określa procesy, które należy odblokować\n[x] Określa procesy, które należy utworzyć\n[ ] Wybiera proces do uruchomienia spośród procesów gotowych\n[ ] Wymaga architektury wieloprocesorowej",
+            "\nPlanowanie krótkoterminowe\n[ ] Bezpośrednio decyduje o wyborze procesów, które należy wczytać do pamięci\n[ ] Określa procesy, które należy odblokować\n[ ] Określa procesy, które należy zablokować\n[ ] Określa procesy, których nie można wywłaszczyć\n[ ] Ustala kolejność uruchamiania procesów gotowych\n[x] Wybiera proces do uruchomienia spośród procesów gotowych\n[ ] Wybiera proces do uruchomienia spośród procesów zablokowanych\n[ ] Wymaga architektury wieloprocesorowej",
+            "\nPlanowanie zadań (scheduling) ma na celu:\n[ ] Synchronizowanie dostępu do zasobów\n[ ] Unikanie blokad\n[x] Wybór procesu do aktywacji",
+            "\nPlanowanie średnioterminowe\n[ ] Bezpośrednio decyduje o wyborze procesów, które należy wczytać do pamięci\n[ ] Określa procesy, które należy zablokować\n[ ] Wymaga architektury wieloprocesorowej\n[x] określa kolejność kopiowania procesów do pamięci z obszaru wymiany\n[ ] określa procesy, które należy odblokować\n[ ] wybiera proces do uruchomienia spośród procesów gotowych",
+            "\nPlanowanie\n[x] Bezpośrednio decyduje o wyborze procesów, które należy wczytać do pamięci\n[ ] Musi byc zaimplementowane w Każdym wieloprogramowym SO\n[x] Określa procesy, które należy zablokować\n[x] Polega na wyborze procesu, który ma zostać usunięty z pamięci op\n[x] To wybór zadania, które w pierwszej kolejności powinno zostać wczytane do pamięci op\n[ ] Wymaga architektury wieloprocesorowej",
+            "\nPlik MFT (Master File Table) w systemie plików NTFS\n[ ] Służy do określania uprawnień dostępu do plików\n[ ] Służy do określania warunków logowania użytkowników do systemu\n[ ] Zawiera kopię boot sektora\n[x] Zawiera listy ACL wszystkich plików\n[x] Zawiera opis wszystkich plików w systemie\n[ ] Zawiera tablicę partycji dysku",
+            "\nPodkatalog systemu plików FAT32\n[ ] Jest plikiem zawierającym rekordy z nazwami i atrybutami należących do niego plików\n[x] Ma ograniczoną wielkość, zależną od formatowania\n[ ] Zawiera pozycję . (dowiązanie do niego samego)",
+            "\nPodstawowy algorytm przełączania procesów w systemie Unix\n[ ] Jest algorytmem bez priorytetów\n[ ] Jest algorytmem bez wywłaszczania\n[ ] Jest algorytmem z wywłaszczaniem\n[ ] Jest algorytmem z wywłaszczaniem procesów systemowych i użytkowych\n[ ] Opiera się na priorytecie dynamicznym\n[ ] Opiera się na priorytecie dynamicznym, obniżanym dla procesów intensywnych obliczeniowo, a podwyższanym dla procesów interakcyjnych\n[ ] Opiera się na priorytecie dynamicznym, wyliczanym w oparciu o wykorzystanie procesora przez proces\n[ ] Opiera się na priorytecie statycznym, wyliczanym w oparciu o wykorzystanie procesora przez proces\n[ ] Pozwala modyfikować priorytet procesu przy pomocy funkcji nice\n[ ] Pozwala wywłaszczać procesy użytkownika\n[ ] Przydziela stałe priorytety procesom zablokowanym",
+            "\nPowłoka systemu operacyjnego Unix\n[ ] Jest metodą synchronizacji zapisów na dysku\n[ ] Może być wyłączana komendą fctl\n[ ] Określa dostępny zestaw i składnię funkcji systemowych\n[ ] Określa dostępny zestaw i składnię komend sterujących\n[x] Określa dostępny zestaw i składnię komend wewnętrznych\n[ ] Określa dostępny zestaw i składnię komend zewnętrznych\n[ ] Określa język programowania skryptów systemowych\n[ ] Określa zmienne środowiskowe dla uruchamianych komend\n[ ] Polega na zapisie bufora na dysk, w chwili jego zwalniania\n[x] Pozwala na edytowanie linii komendy\n[x] Pozwala na przeglądanie historii wykonywanych komend",
+            "\nPowłoka systemu operacyjnego\n[x] Określa dostępny zestaw i składnie komend sterujących\n[x] Określa dostępny zestaw i składnie komend wewnętrznych\n[ ] Określa dostępny zestaw i składnie komend zewnętrznych\n[x] Określa dostępny zestaw komend wewnętrznych\n[ ] Określa dostępny zestaw komend wewnętrznych i zewnętrznych\n[ ] Określa dostępny zestaw komend zewnętrznych\n[x] Określa język programowania skryptów systemowych\n[ ] Określa język skryptów systemowych\n[ ] Określa operacje edycji linii komendy\n[ ] Określa zestaw dostępnych języków programowania\n[x] Określa zmienne środowiskowe dla uruchamianych komend\n[ ] Pozwala definiować zmienne środowiskowe, przekazywane do uruchamianych programów\n[ ] Pozwala definiować, które programy mają być uruchomione jako rezydentne w pamięci operacyjnej\n[ ] Pozwala kontrolować poprawność parametrów w linii komendy przed wywołaniem programu (komendy zewnętrznej)\n[x] Pozwala na edytowanie linii komendy\n[x] Pozwala na przeglądanie historii wykonywanych komend",
+            "\nPozycje katalogowe w systemie FAT\n[x] Zawierają datę modyfikacji pliku\n[ ] Zawierają informacje o położeniu pliku na dysku\n[x] Zawierają nazwy plików\n[ ] Zawierają rozszerzenie 3 - znakowe\n[ ] pozwalają definiować nazwy plików dowolnej wielkości\n[x] zawierają informacje o położeniu pliku na dysku\n[ ] zawierają sumę kontrolną pliku",
+            "\nPozycje katalogowe w systemie Unix\n[ ] Zawierają datę modyfikacji pliku\n[ ] Zawierają nazwy plików\n[ ] Zawierają rozszerzenie 3-znakowe",
+            "\nProces gotowy\n[ ] Czasami usuwany jest z pamięci operacyjnej (kopiowany do obszaru wymiany)\n[ ] Może być usuwany z pamięci operacyjnej (kopiowany do obszaru wymiany)\n[x] Oczekuje na zwolnienie procesora przez proces aktywny\n[ ] Realizuje operacje drugoplanowe\n[ ] Realizuje operacje semaforowe\nia\nProces moze przejść do stanu\n[x] Bezpośrednio ze stanu zablokowania\n[ ] Po wyczerpaniu kwantu czasu aktywności (w systemie z algorytmem karuzelowym)\n[ ] W wyniku wykonania funkcji exit (w Unixie)",
+            "\nProces może przejść do stanu aktywności\n[ ] Bezpośrednio po utworzeniu\n[x] Bezpośrednio ze stanu gotowości\n[ ] Po wyczerpaniu kwantu czasu aktywności (w systemie z algorytmem karuzelowym)",
+            "\nProces może przejść do stanu gotowości\n[ ] Bezpośrednio ze stanu gotowości\n[x] Bezpośrednio ze stanu zablokowania\n[ ] Po wyczerpaniu kwantu czasu aktywności (w systemie z algorytmem karuzelowym)\n[ ] W wyniku wykonania funkcji exit (w Unixie)",
+            "\nProces może przejść do stanu zablokowania (uśpienia)\n[x] Bezpośrednio ze stanu aktywności\n[ ] Bezpośrednio ze stanu gotowości\n[ ] Po wyczerpaniu kwantu czasu aktywności\n[ ] Po wyczerpaniu kwantu czasu aktywności (w systemie z algorytmem karuzelowym)\n[ ] W wyniku wykonania funkcji exit (w Linuxie)\n[ ] W wyniku wykonania funkcji exit (w Unixie)",
+            "\nProces może przejść do stanu zablokowania\n[ ] Bezpośrednio ze stanu gotowości\n[x] Po wyczerpaniu kwantu czasu aktywności (w systemie z algorytmem karuzelowym)\n[ ] W wyniku wykonania funkcji exit (w Unixie)",
+            "\nProces przechodzi do stanu gotowości\n[x] Bezpośrednio po uruchomieniu\n[x] Po wyczerpaniu kwantu aktywności (w systemie z wywłaszczeniem)\n[x] Ze stanu uśpienia w wyniku odebrania sygnału od innego procesu",
+            "\nProces uśpiony (zablokowany)\n[ x] Oczekuje aż inny proces go zbudzi\n[ ] Oczekuje na zwolnienie procesora przez proces aktywny\n[x] Oczekuje na zwolnienie procesora przez procesor aktywny\n[x] Realizuje operacje semaforowe\n[ ] Zawsze usuwany jest z pamięci operacyjnej (kopiowany do obszaru wymiany)",
+            "\nProcesy charakteryzują się:\n[ ] Kontekstem, który Określa jakie procesy sa wykonywane współbieżnie\n[x] Możliwością przerywania i wznawiania wykonania (według składowanego kontekstu)\n[x] Sekwencyjnym wykonywaniem operacji\n[x] Złożonością obliczeniowa, wyrażona np. przez liczbę pętli, skoków i rozgałęzień",
+            "\nProces\n[ ] Czasami usuwany jest z pamięci operacyjnej (kopiowany do obszaru wymiany)\n[x] Oczekuje na zwolnienie procesora przez proces aktywny\n[ ] Realizuje operacje drugoplanowe",
+            "\nPrzetwarzanie potokowe w Linuxie\n[ ] Dostępne jest tylko w systemach wieloprocesorowych\n[ ] Liczba możliwych do przesłania danych ograniczona jest do 12 kB\n[x] Może być wykorzystane w linii komend oraz w skryptach systemowych\n[x] Realizowane jest przez przekierowanie standardowego wyjścia komendy pierwszej do standardowego wejścia komendy drugiej\n[x] Realizowane jest z wykorzystaniem specjalnego pliku pośredniczącego\n[ ] W powłoce sh można je wywołać wypisując dwie komendy w nawiasach okrągłych, rozdzielone przecinkami\n[ ] dostępne jest tylko w systemach wieloprocesorowych",
+            "\nPrzetwarzanie pośrednie\n[ ] Eliminuje fragmentację zewnętrzną dysku przez przesuwanie plików w tle\n[x] Polega na kopiowaniu danych między dyskiem a wolnymi urządzeniami zewnętrznymi w celu poprawy wykorzystania procesora\n[ ] To technika przydzielania dodatkowych buforów procesom uprzywilejowanym",
+            "\nPrzydział ciągły bloków alokacji do plików na dysku:\n[ ] Charakteryzuje się fragmentacją wewnętrzną dysku\n[x] Charakteryzuje się fragmentacją zewnętrzną dysku\n[ ] Jest algorytmem nie wykorzystywanym z powodu problemu ze zwiększaniem wielkości pliku\n[ ] Jest algorytmem optymalnym, nie dającym się zaimplementować w praktyce\n[ ] Zapewnia najszybszy odczyt całego pliku",
+            "\nPrzydział ciągły miejsca na dysku:\n[ ] Charakteryzuje się fragmentacją wewnętrzną dysku\n[ ] Charakteryzuje się fragmentacją zewnętrzną dysku\n[ ] Charakteryzuje się fragmentacją zewnętrzną przestrzeni dysku\n[ ] Jest algorytmem optymalnym, nie dającym się zaimplementować w praktyce\n[ ] Wymaga zapisu tablicy indeksowej na dysku\n[x] charakteryzuje się fragmentacją zewnętrzną przestrzeni dysku\n[ ] wymaga zapisu tablicy indeksowanej na dysku",
+            "\nPrzydział indeksowy miejsca na dysku:\n[ ] Charakteryzuje się fragmentacją zewnętrzną przestrzeni dysku\n[ ] Jest algorytmem optymalnym, nie dającym się zaimplementować w praktyce\n[ ] Opisuje położenie pliku jako ciąg segmentów różnej wielkości\n[x] Wymaga zapisu tablicy indeksowej na dysku",
+            "\nPrzydział listowy miejsca na dysku:\n[ ] Charakteryzuje się brakiem fragmentacji wewnętrznej przestrzeni dysku\n[ ] Jest algorytmem optymalnym, nie dającym się zaimplementować w praktyce\n[ ] Wymaga zapisu tablicy listowej na dysku",
+            "\nSegmentacja pamięci\n[ ] Polega na przydziale do programu stron pamięci o stałej wielkości\n[ ] Powoduje fragmentację zewnętrzną\n[ ] Wymaga tworzenia obrazu pamięci w obszarze wymiany na dysku",
+            "\nSekcja krytyczna\n[ ] To technika synchronizacji dostępu do pamięci współdzielonej przez procesor\n[ ] To technika synchronizacji dostępu do pamięci współdzielonej przez procesy\n[ ] Wykorzystywana jest do negocjacji dostępu do semaforów\n[x] Wykorzystywana jest od ochrony danych przed równoczesną ich modyfikacją przez procesy współbieżne",
+            '\nSekwencyjny dostęp do pliku\n[ ] Jest możliwy tylko w plikach z rekordami stałej długości\n[ ] Nie powinien być używany — jest implementowany jedynie z przyczyn historycznych\n[ ] Nie pozwala dopisywać rekordów na koniec istniejącego pliku.\n[ ] Polega na czytaniu lub zapisie pliku rekord po rekordzie, w stałej kolejności\n[ ] Powinien być używany jedynie przy operacjach na plikach specjalnych, odpowiadających urządzeniom znakowym\n[ ] Pozwala czytać rekordy w dowolnej kolejności dzięki operacji lseek\n[ ] Pozwala na odczyt rekordów pliku w dowolnej kolejności (wykorzystując funkcję lseek)\n[ ] Pozwala na występowanie plików nieciągłych, z niezaalokowanymi dziurami\n[ ] Pozwala na zapis rekordów tylko na koniec pliku\n[ ] Szereguje dostęp wielu procesów do pliku\n[ ] Ułatwia grupowanie operacji dyskowych przez system operacyjny\n[ ] Wyklucza powstawanie „dziur" w plikach, w których nie ma przydzielonych bloków',
+            "\nSekwencyjny dostęp do\n[ ] Jest możliwy tylko w plikach z rekordami stałej długości\n[ ] Nie powinien byz używany - jest implementowany jedynie z przyczyn historycznych\n[ ] Nie pozwala dopisywać rekordów na koniec istniejącego pliku\n[x] Polega na czytaniu lub zapisie pliku rekord po rekordzie w stałej kolejności\n[ ] Powinien byc używany jedynie przy operacjach na plikach specjalnych, odpowiadających urządzeniom znakowym\n[ ] Pozwala czytać rekordy w dowolnej kolejności dzięki operacji lseek\n[ ] Pozwala na występowanie plików nieciągłych, z niezaalokowanymi dziurami\n[ ] Szereguje dostęp wielu procesów do pliku\n[x] Ułatwia grupowanie operacji dyskowych przez system operacyjny\n[x] Wyklucza powstawanie “dziur” w plikach, w których nie ma przydzielonych bloków",
+            "\nSemafory Dijkstry\n[ ] Mogą blokować proces przy wykonywaniu operacji sygnalizuj V\n[ ] Operacja czekaj na tych semaforach zawsze usypia procesy\n[ ] Operacja sygnalizuj na tych semaforach może usypiać procesy\n[ ] Przyjmują dowolne wartości dodatnie\n[ ] Przyjmują dowolne wartości zmiennoprzecinkowe\n[ ] Są mechanizmem ograniczającym dostęp do plików\n[ ] Są mechanizmem synchronizującym dostęp do plików\n[x] Służą do synchronizacji procesów\n[ ] To technika przydzielania dodatkowych buforów procesom uprzywilejowanym\n[x] To technika synchronizowania procesów\n[ ] W ich implementacji stosuje się pętle gorącego czekania",
+            '\nSemafory binarne:\n[ ] Można używać do rozwiązywania dowolnych problemów synchronizacji procesów\n[ ] Są to dane całkowitoliczbowe z zakresu 0-2" (n>1) z niepodzielnymi operacjami P i V\n[ ] Są to dane jednobitowe, które można testować, ustawiać i zerować\n[ ] Są to flagi dwustanowe, na których zdefiniowane są nieprzerywalne operacje P i V\n[ ] Są to struktury danych do modelowania ruchu ulicznego\n[ ] Służą do blokowania dostępu do dysku w trybie binarnym (nie znakowym)\n[ ] Służą do synchronizacji procesów współbieżnych\n[ ] Służą do wyznaczania czasu w systemach czasu rzeczywistego',
+            "\nSemafory\n[x] Można używać do rozwiązywania dowolnych problemów synchronizacji procesów\n[x] Operacja czekaj na tych semaforach zawsze usypia procesy\n[ ] Operacja sygnalizuj na tych semaforach moze usypiać procesy\n[ ] Sa mechanizmem ograniczającym dostęp do plików\n[x] Sa mechanizmem synchronizującym dostęp do plików\n[ ] Sa to dane całkowitoliczbowe z zakresu 0 - 2n (n>1) z niepodzielnymi operacjami P i V\n[x] Sa to dane całkowitoliczbowe, na których zdefiniowane sa operacje P i V\n[x] Sa to dane jednobitowe, które Można testować, ustawiać i zerować\n[ ] Sa to flagi dwustanowe, na których zdefiniowane sa nieprzerywalne operacje P i V\n[ ] Sa to struktury danych do modelowania ruchu ulicznego\n[ ] Służą do blokowania dostępu do dysku w trybie binarnym (nie znakowym)\n[x] Służą do synchronizacji procesów\n[x] Służą do synchronizacji procesów współbieżnych\n[ ] Służą do wyznaczania czasu w systemach czasu rzeczywistego\n[ ] W ich implementacji stosuje sie pętle gorącego czekania",
+            "\nStan procesu:\n[ ] Identyfikuje procesy, które nie wymagają dostępu do urządzeń zewnętrznych\n[x] Jest pamiętany w tablicy procesów\n[ ] Jest wyznaczany przy pierwszym uruchomieniu procesu i potem się nie zmienia\n[x] Jeżeli jest aktywny, to proces jest wykonywany przez procesor\n[x] określa, czy procesor jest przydzielony do procesu\n[ ] przechowywany jest w jądrze systemu operacyjnego w obszarze uarea",
+            "\nStronicowanie na żądanie\n[ ] Jest włączane na żądanie przez proces (w wyniku wykonania funkcji systemowej paging_req)\n[ ] Polega na buforowaniu stron pamięci w pamięci podręcznej cache\n[ ] Polega na składowaniu na dysk całego obrazu pamięci zablokowanego procesu\n[x] Polega na wymianie stron w pamięci fizycznej, wczytywaniu stron, do których występują aktualnie odwołania\n[ ] To podstawowa technika przyśpieszenia dostępu do pamięci\n[x] To podstawowa technika zwiększania pamięci widzianej przez programy\n[x] Umożliwia zapisywanie do obszaru wymiany na dysku fragmentów kontekstów procesów, gdy brakuje pamięci fizycznej\n[x] Wymaga aby tablica stron zawierała flagę ważności (validity)\n[ ] Wymaga aby wszystkie strony programu zmieściły się w pamięci operacyjnej\n[x] Wymaga dodatkowych pól w tablicy stron (np. flagi ważności)\n[x] Wymaga utrzymywania w pamięci tablicy stron\n[ ] Wyłączane jest komendą operatorską swapon\n[ ] wykorzystuje segmentację pamięci\n[x] wymaga tworzenia obrazu pamięci w obszarze wymiany\n[ ] włączane jest na żądanie procesu (przez wywołanie funkcji swapon)",
+            "\nStronicowanie pamięci\n[x] Polega na przydziale do programu ramek pamięci o stałej wielkości\n[ ] Polega na przydziale do programu segmentów pamięci dowolnej wielkości\n[ ] Polega na przydziale do programu stron pamięci dowolnej wielkości\n[ ] Pozwala implementować liniowy model adresów fizycznych w programie\n[x] Pozwala implementować liniowy model adresów logicznych w programie\n[ ] Wymaga tworzenia obrazu pamięci w obszarze wymiany na dysku\n[ ] Zmienia dynamicznie ramki przydzielone do stron",
+            "\nSwobodny (zrandomizowany), dostęp do pliku\n[ ] polega na współdzieleniu otwartych plików przez wiele procesów\n[x] pozwala na występowanie plików nieciągłych, z niezaalokowanymi dziurami\n[ ] szereguje dostęp wielu procesów do pliku",
+            "\nSwobodny dostęp do pliku\n[ ] Blokuje równoczesny dostęp wielu procesów do pliku\n[ ] Pozwala na odczyt rekordów pliku w dowolnej kolejności wykorzystując funkcję lseek\n[x] Pozwala na występowanie plików nieciągłych, z niezaalokowanymi dziurami\n[ ] Pozwala na zapis fragmentów różnych plików do wspólnego bloku alokacji\n[x] Przy zapisie może spowodować powstanie plików z „dziurami”\n[ ] Szereguje dostęp wielu procesów do pliku\n[ ] Uniemożliwia otwarcie pliku na wyłączność",
+            "\nSygnały w Linuxie\n[x] Mogą być adresowane przez podanie PID procesu, do którego są wysyłane\n[x] Procesy mogą dynamicznie przeprogramowywać swoją reakcję na sygnały\n[ ] Są odbierane tylko przez procesy aktywne w chwili wysłania sygnału",
+            "\nSygnały w systemie Linux\n[ ] Generowane są wyłącznie przez sterowniki urządzeń zewnętrznych\n[ ] Nie mogą być ignorowane przez procesy\n[x] Wysyłane są do pojedynczych procesów, grup procesów, procesów określonego użytkownika lub do wszystkich procesów",
+            "\nSygnały w systemie Unix\n[ ] Generowane są przez wykonanie operacji kill\n[ ] Generowane są wyłącznie przez sterowniki urządzeń zewnętrznych\n[ ] Mogą być adresowane do wszystkich procesów grupy użytkowników o znanym GID\n[ ] Mogą być adresowane do wszystkich procesów uśpionych w systemie\n[ ] Mogą być adresowane do wszystkich procesów użytkownika o znanym UID\n[ ] Mogą być adresowane do wszystkich procesów użytkowników o znanym UID\n[ ] Mogą być ignorowane przez procesy (z wyjątkiem sygnału 9)\n[ ] Mogą być wysłane do wielu procesów równocześnie\n[ ] Mogą powodować zakończenie procesu\n[ ] Można definiować własne funkcje obsługi niektórych z nich\n[ ] Proces można zaprogramować tak, aby ignorował wszystkie sygnały przychodzące\n[ ] Większość może być ignorowana przez procesy\n[ ] Wykorzystywane są do synchronizacji procesów\n[ ] Wykorzystywane są m.in. do zabijania procesów\n[ ] Wysyłane mogą być przez każdy proces przy pomocy funkcji kill\n[ ] Wysyłane mogą być przez każdy proces przy pomocy funkcji signal\n[ ] Wysyłane są do pojedynczych procesów lub do grup procesów\n[ ] Wysyłane są do pojedynczych procesów, grup procesów, procesów określonego użytkownika lub do wszystkich procesów",
+            "\nSygnały w systemie\n[x] Generowane sa przez wykonanie operacji kill\n[ ] Generowane są wyłącznie przez sterowniki urządzeń zewnętrznych\n[x] Można definiować własne funkcje obsługi niektórych z nich\n[ ] Proces Można zaprogramować tak, aby ignorował wszystkie sygnały przychodzące\n[x] Większość może być ignorowana przez procesy\n[x] Wykorzystywane sa do synchronizacji procesów\n[x] Wykorzystywane sa m.in. do zabijania procesów\n[x] Wysyłane mogą byc przez Każdy proces przy pomocy funkcji kill\n[ ] Wysyłane mogą byc przez Każdy proces przy pomocy funkcji signal\n[x] Wysyłane sa do pojedynczych procesów, grup procesów, procesów określonego użytkownika lub do wszystkich procesów\n[x] Wysyłane są do pojedynczych procesów lub do grup procesów\n[ ] mogą byc adresowane do wszystkich procesów uśpionych w systemie\n[x] mogą byc adresowane do wszystkich procesów użytkownika o znanym UID\n[ ] mogą byc ignorowane przez procesy (z wyjątkiem sygnału 9)\n[x] mogą byc wysłane do wielu procesów równocześnie\n[x] mogą powodować zakończenie procesu",
+            "\nSystemy wielodostępne\n[x] Dzielą zadania na interakcyjne i wykonywane w tle\n[x] Pozwalają na przesyłanie sobie poczty w obrębie systemu\n[x] Pozwalają na współbieżne przetwarzanie wielu procesów (jednego lub wielu użytkowników)\n[x] Pozwalają na wykonywanie wielu zadań współbieżnie\n[ ] Wymagają architektury jednoprocesorowej\n[ ] Wymagają architektury wieloprocesorowej\n[ ] Wymagają wielu terminali podłączonych do jednego komputera\n[ ] Wymuszają pracę wsadową na komputerze\n[x] Zapewniają dostęp wszystkich użytkowników do identycznych danych",
+            "\nTablica FAT w systemie MS-DOS\n[ ] Pozwala przydzielać rekordy rezerwowe w miejsce uszkodzonych\n[x] Zastępuje mapę zajętości dysku\n[x] Zawiera informacje o defektach nośnika w pamięci dyskowej\n[ ] zawiera osobną pozycję dla każdego rekordu fizycznego (sektora) w partycji dysku",
+            "\nTechnika opóźnionego zapisu na dysk w systemie Unix\n[x] Jest metodą synchronizacji zapisów na dysku sieciowym\n[ ] Moze byc wyłączana komenda fctl\n[ ] Może być wybiórczo stosowana przez programowe włączanie/wyłączanie funkcją fct/\n[ ] Może być wybiórczo stosowana przez programowe włączanie/wyłączanie funkcją fctl\n[x] Polega na wprowadzeniu pętli opóźniającej miedzy kolejnymi rozkazami zapisu\n[ ] Polega na zapisie bufora na dysk, w chwili jego zwalniania",
+            "\nTechnika opóźnionego zapisu na dysk w systemie Unix\n[x] Określa dostępny zestaw komend wewnętrznych\n[x] Pozwala definiować zmienne systemowe udostępnione uruchamianym programom\n[x] Pozwala na uruchomienie programów z linii komendy",
+            "\nW Unixie występuje katalog, dostępny przez ścieżkę ../\n[x] Jest to katalog nadrzędny\n[ ] Jest to katalog roboczy procesu\n[ ] Każdy proces może mieć swój taki katalog\n[ ] Proces musi mieć prawa zapisu w tym katalogu, aby mógł się wykonywać",
+            "\nW Unixie występuje katalog, dostępny przez ścieżkę ./\n[ ] Jest to katalog główny, jeden dla całego systemu\n[ ] Jest to katalog nadrzędny\n[x] Jest to katalog roboczy procesu\n[x] Każdy proces moze mieć swój taki katalog\n[ ] Proces musi mieć prawa zapisu w tym katalogu, aby mógł się wykonywać",
+            "\nW Unixie występuje katalog, dostępny przez ścieżkę /\n[x] Jest to katalog główny, jeden dla całego systemu\n[ ] Jest to katalog roboczy procesu\n[ ] Każdy proces może mieć swój taki katalog",
+            "\nW Unixie występuje katalog, dostępny przez ścieżkę\n[ ] Jest to katalog główny, jeden dla całego systemu\n[x] Jest to katalog nadrzędny\n[ ] Jest to katalog roboczy procesu\n[x] Każdy proces moze mieć swój taki katalog\n[ ] Proces musi mieć prawa zapisu w tym katalogu, aby mógł sie wykonywać",
+            "\nW hierarchicznym systemie plików\n[x] Mogą występować wielokrotne dowiązania twarde do pliku\n[x] Określa sie ścieżki dostępu do plików\n[x] Określona jest dokładnie jedna ścieżka bezwzględna do pliku\n[ ] Użytkownicy mają dostęp tylko do swoich plików\n[ ] Użytkownikom przypisane są priorytety dostępu do plików\n[ ] Występuje wiele katalogów głównych\n[x] Występują ścieżki względne i bezwzględne dostępu do plików\n[x] występuje jeden katalog główny\n[x] występuje wiele katalogów",
+            "\nWarunek postępu przy dostępie do sekcji krytycznej\n[x] To wymaganie, aby proces dostał się do sekcji krytycznej, gdy nie jest ona zajęta\n[ ] To zapewnienie, że dwa procesy nie czekają w tym samym czasie na dostęp do sekcji\n[ ] Zapewnia, że proces nie jest wywłaszczany, gdy znajduje się w sekcji krytycznej",
+            "\nWarunek postępu w synchronizacji miedzy procesami:\n[x] To wymaganie, aby proces nie był usypiany przy wejściu do sekcji krytycznej, gdy nie ma w niej innych procesów\n[x] To wymaganie, aby synchronizacja nie powodowała nieograniczonego w czasie zawieszenia procesu\n[ ] To zapewnienie, że dwa procesy nie znajdą się w tym samym czasie w sekcji krytycznej\n[ ] Zapewnia, że proces nie jest wywłaszczany, gdy znajduje się w sekcji krytycznej",
+            "\nWarunek wykluczania w synchronizacji między procesami:\n[ ] To wymaganie, aby synchronizacja nie powodowała nieograniczonego w czasie zawieszenia procesu\n[x] To zapewnienie, że dwa procesy nie znajdą się w tym samym czasie w sekcji krytycznej\n[ ] Wymaga, aby proces miał dostęp do sekcji krytycznej, gdy nie przebywa w niej inny\n[ ] Zapewnia, że proces nie jest wywłaszczany, gdy znajduje się w sekcji krytycznej",
+            "\nWarunki konieczne do wystąpienia blokad (deadlock)\n[ ] Określają, jak pisać programy wieloprocesowe aby uniknąć blokad\n[ ] Określają, jak pisać programy wielowątkowe aby uniknąć blokad\n[ ] Określają, kiedy proces może przejść do stanu zablokowania\n[x] To m. in. brak mechanizmu umożliwiającego wywłaszczanie zasobów od procesów\n[ ] To m. in. brak priorytetów w dostępie do zasobów\n[x] To m. in. możliwość zawieszania procesów z przydzielonymi pewnymi zasobami\n[ ] To m.in. przełączanie procesów według algorytmu bez wywłaszczania\n[ ] To m.in. przełączanie procesów według algorytmu z wywłaszczaniem\n[x] To m.in. występowanie zasobów, które nie mogą być współdzielone",
+            "\nWarunki konieczne do wystąpienia blokady to\n[x] Brak mechanizmu Umożliwiającego wywłaszczanie zasobów od procesów\n[x] Brak mechanizmu, który Umożliwiałby procesom przyjecie zasobów przydzielonych innym\n[ ] Brak priorytetów w dostępie do zasobów\n[x] Możliwość zawieszania procesów z przydzielonymi pewnymi zasobami\n[ ] Określają, jak pisać programy wieloprocesowe aby unikać blokad\n[ ] Określają, jak pisać programy wielowątkowe aby unikać blokad\n[ ] Określają, kiedy proces moze przejść do stanu zablokowania\n[x] Przetrzymywanie i oczekiwanie, tzn. pozwolenie procesom nie będącym aktywnymi ani gotowymi na zachowanie przydziału zasobu\n[x] Przełączanie procesów według algorytmu bez wywłaszczania\n[ ] Przełączanie procesów według algorytmu planowania z wywłaszczaniem\n[x] występowanie zasobów, które nie mogą byc równocześnie wykorzystywane przez wiele procesów\n[x] występowanie zasobów, które nie mogą byc współdzielone",
+            "\nWspółbieżność w systemach operacyjnych\n[ ] Dostępna jest tylko w systemach wieloprocesorowych\n[x] Realizowana jest przez Przełączanie procesów, tzn. wstrzymywanie procesów co pewien czas i pre innych\n[ ] W powłoce sh można ja wywołać wypisując dwie komendy w nawiasach okrągłych, rozdzielone przecinkami",
+            "\nWzorce plików\n[x] Pozwalają definiować ścieżki wyszukiwania komend w systemach operacyjnych\n[ ] Sa mechanizmem definiowania dopuszczalnej zawartości plików\n[x] Wykorzystują znaki ? oraz * do Określania dowolnych znaków w nazwie pliku",
+            "\nZrandomizowany dostęp do pliku\n[ ] Nie jest możliwy dla plików zapisanych na nośniku wymiennym\n[ ] Nie wymaga otwarcia pliku przed odczytem\n[x] Pozwala na zapis rekordów pliku poza jego aktualny koniec",
+            "\nŚcieżka do pliku\n[ ] Może być względna, bezwzględna lub symboliczna\n[x] Ścieżka bezwzględna określa położenie pliku względem katalogu głównego\n[ ] Ścieżka symboliczna określa położenie pliku względem katalogu domowego użytkownika\n[ ] Ścieżka względna określa położenie pliku względem katalogu domowego użytkownika",
+            "\nŚcieżka do\n[ ] Może byc względna, bezwzględna lub symboliczna\n[x] Ścieżka bezwzględna określa położenie pliku względem katalogu głównego\n[ ] Ścieżka względna określa położenie pliku względem katalogu domowego użytkownika",
+            "\nŚrednioterminowe planowanie zadań\n[ ] Musi być zaimplementowane w każdym wieloprogramowym systemie operacyjnym\n[x] Polega na wyborze procesu, który ma zostać usunięty z pamięci operacyjnej\n[ ] To wybór zadania, które w pierwszej kolejności powinno zostać wczytane do pamięci operacyjnej",
+            '\n„Spooling"\n[ ] Eliminuje fragmentacje zewnętrzna dysków przez przesuwanie plików w trakcie normalnej pracy komputera (w tle)\n[ ] Eliminuje fragmentację zewnętrzną dysków przez przesuwanie plików, przy czym uruchamiany jest przy wyłączonych wszystkich innych procesach\n[x] Polega na zapisie danych wyjściowych z programu na szybkie nośniki magnetyczne i drukowaniu ich w tle po zakończeniu programu\n[ ] To metoda buforowania dysku bazująca na tworzeniu dużych puli buforów systemowych\n[ ] To metoda buforowania dysku w szybkich pamięciach wbudowanych do sterownika\n[x] To technika kopiowania w tle danych z nośnika papierowego na szybszy magnetyczny\n[ ] To technika programowania, zmniejszająca pamięć wymaganą do wykonania programu\n[ ] To technika przydzielania dodatkowych buforów procesom uprzywilejowanym',
+            "W hierarchicznym systemie plikow wystepuje wiele katalogow\n[X] TAK\n[ ] NIE",
+            // TAK NIE
+"W hierarchicznym systemie plikow wystepuje wiele katalogow glownych\n[ ] TAK\n[X] NIE",
+"W hierarchicznym systemie plikow uzytkownikom przypisane sa priorytety dostepu do plikow\n[ ] TAK\n[X] NIE",
+"W hierarchicznym systemie plikow uzytkownicy maja dostep tylko do swoich plikow\n[ ] TAK\n[X] NIE",
+"W hierarchicznym systemie plikow okresla sie sciezki dostepu do plikow\n[X] TAK\n[ ] NIE",
+"W hierarchicznym systemie plikow wystepuje jeden katalog glowny\n[X] TAK\n[ ] NIE","W hierarchicznym systemie plikow okreslona jest dokladnie jedna sciezka bezwzgledna do pliku\n[X] TAK\n[ ] NIE","W hierarchicznym systemie plikow wystepuja sciezki wzgledne i bezwzgledne dostepu do plikow\n[X] TAK\n[ ] NIE","W hierarchicznym systemie plikow moga wystepowac wielokrotne dowiazania twarde do pliku\n[X] TAK\n[ ] NIE","Bloki alokacji (klastry) w systemie plikow dobierane sa tak, aby zminimalizowac fragmentacje\nzewnetrzna\n[ ] TAK\n[X] NIE","Bloki alokacji (klastry) w systemie plikow dobierane sa tak, aby zminimalizowac fragmentacje\nwewnetrzna\n[X] TAK\n[ ] NIE","Bloki alokacji (klastry) w systemie plikow sa stalej wielkosci w calym systemie plikow\n[X] TAK\n[ ] NIE","Bloki alokacji (klastry) w systemie plikow sa zawsze wielkosci dwoch rekordow fizycznych (sektorow)\nna dysku\n[ ] TAK\n[X] NIE","Bloki alokacji (klastry) w systemie plikow powinny byc jak najwieksze, aby bylo ich w systemie\nniewiele\n[ ] TAK\n[X] NIE","Bloki alokacji (klastry) w systemie plikow numerowane sa liczbami binarnymi stalej dlugosci, co\nogranicza ich liczbe\n[X] TAK\n[ ] NIE","Sekwencyjny dostep do pliku polega na czytaniu lub zapisie pliku rekord po rekordzie w stalej\nkolejnosci\n[X] TAK\n[ ] NIE","Sekwencyjny dostep do pliku pozwala na wystepowanie plikow nieciaglych, z niezaalokowanymi\ndziurami\n[ ] TAK\n[X] NIE","Sekwencyjny dostep do pliku jest mozliwy tylko w plikach z rekordami stalej dlugosci\n[ ] TAK\n[X] NIE","Sekwencyjny dostep do pliku nie pozwala dopisywac rekordow na koniec istniejacego pliku\n[ ] TAK\n[X] NIE","Sekwencyjny dostep do pliku nie powinien byz uzywany - jest implementowany jedynie z przyczyn\nhistorycznych\n[ ] TAK\n[X] NIE","Sekwencyjny dostep do pliku pozwala czytac rekordy w dowolnej kolejnosci dzieki operacji lseek\n[ ] TAK\n[X] NIE","Sekwencyjny dostep do pliku wyklucza powstawanie dziur w plikach, w ktorych nie ma\nprzydzielonych blokow\n[X] TAK\n[ ] NIE",
+"Sekwencyjny dostep do pliku ulatwia grupowanie operacji dyskowych przez system operacyjny\n[X] TAK\n[ ] NIE","Sekwencyjny dostep do pliku powinien byc uzywany jedynie przy operacjach na plikach specjalnych,\nodpowiadajacych urzadzeniom znakowym\n[ ] TAK\n[X] NIE","Sekwencyjny dostep do pliku szereguje dostep wielu procesow do pliku\n[ ] TAK\n[X] NIE","Bezposredni==swobodny dostep do pliku wymaga zmiany kolejnosci rekordow w pliku w celu\noptymalizacji czas dostepu\n[ ] TAK\n[X] NIE","Bezposredni==swobodny dostep do pliku pozwala na wystepowanie plikow nieciaglych, wewnatrz\nktorych moga wystapic niezaalokowane obszary\n[X] TAK\n[ ] NIE","Bezposredni==swobodny dostep do pliku jest mozliwy tylko w plikach z rekordami stalej dlugosci\n[X] TAK\n[ ] NIE","Bezposredni==swobodny dostep do pliku pozwala na wystepowanie plikow nieciaglych, z\nniezaalokowanymi dziurami\n[X] TAK\n[ ] NIE","Bezposredni==swobodny dostep do pliku pozwala czytac rekordy w dowolnej kolejnosci dzieki\noperacji lseek\n[X] TAK\n[ ] NIE","Bezposredni==swobodny dostep do pliku pozwala na zapis fragmentow roznych plikow do wspolnego\nbloku alokacji\n[ ] TAK\n[X] NIE","Bezposredni==swobodny dostep do pliku szereguje dostep wielu procesow do pliku\n[ ] TAK\n[X] NIE","Bezposredni==swobodny dostep do pliku blokuje rownoczesny dostep wielu procesow do pliku\n[ ] TAK\n[X] NIE","W unixie wystepuje katalog, dostepny przez sciezke ../ jest to katalog roboczy procesu\n[ ] TAK\n[X] NIE","W unixie wystepuje katalog, dostepny przez sciezke ../ jest to katalog nadrzedny\n[X] TAK\n[ ] NIE","W unixie wystepuje katalog, dostepny przez sciezke ../ jest to katalog glowny, jeden dla calego\nsystemu\n[ ] TAK\n[X] NIE","W unixie wystepuje katalog, dostepny przez sciezke ../ kazdy proces moze miec swoj taki katalog\n[X] TAK\n[ ] NIE","W unixie wystepuje katalog, dostepny przez sciezke ../ proces musi miec prawa zapisu w tym\nkatalogu, aby mogl sie wykonywac\n[ ] TAK\n[X] NIE","Przydzial ciagly miejsca na dysku jest algorytmem optymalnym, nie dajacym sie zaimplementowac w\npraktyce\n[ ] TAK\n[X] NIE","Przydzial ciagly miejsca na dysku charakteryzuje sie fragmentacja zewnetrzna przestrzeni dysku\n[X] TAK\n[ ] NIE","Przydzial ciagly miejsca na dysku wymaga zapisu tablicy indeksowej na dysku\n[ ] TAK\n[X] NIE","Przydzial indeksowy miejsca na dysku jest algorytmem optymalnym, nie dajacym sie\nzaimplementowac w praktyce\n[ ] TAK\n[X] NIE","Przydzial indeksowy miejsca na dysku charakteryzuje sie fragmentacja zewnetrzna przestrzeni dysku\n[ ] TAK\n[X] NIE","Przydzial indeksowy miejsca na dysku wymaga zapisu tablicy indeksowej na dysku\n[X] TAK\n[ ] NIE","Przydzial listowy miejsca na dysku jest algorytmem optymalnym, nie dajacym sie zaimplementowac\nw praktyce\n[ ] TAK\n[X] NIE","Przydzial listowy miejsca na dysku charakteryzuje sie brakiem fragmentacja wewnetrznej przestrzeni\ndysku\n[ ] TAK\n[X] NIE","Przydzial listowy miejsca na dysku wymaga zapisu tablicy listowej na dysku\n[ ] TAK\n[X] NIE","Planowanie krotkoterminowe wymaga architektury wieloproces orowej\n[ ] TAK\n[X] NIE","Planowanie krotkoterminowe bezposrednio decyduje o wyborze procesow, ktore nalezy wczytac do\npamieci\n[ ] TAK\n[X] NIE","Planowanie krotkoterminowe okresla procesy, ktore nalezy zablokowac\n[ ] TAK\n[X] NIE","Planowanie srednioterminowe wymaga architektury wieloprocesorowej\n[ ] TAK\n[X] NIE","Planowanie srednioterminowe bezposrednio decyduje o wyborze procesow, ktore nalezy wczytac do\npamieci\n[X] TAK\n[ ] NIE","Planowanie srednioterminowe okresla procesy, ktore nalezy zablokowac\n[X] TAK\n[ ] NIE","Planowanie srednioterminowe polega na wyborze procesu, ktory ma zostac usuniety z pamieci op\n[X] TAK\n[ ] NIE","Planowanie srednioterminowe to wybor zadania, ktore w pierwszej kolejnosci powinno zostac\nwczytane do pamieci op\n[X] TAK\n[ ] NIE","Planowanie srednioterminowe musi byc zaimplementowane w kazdym wieloprogramowym sO\n[ ] TAK\n[X] NIE","Planowanie dlugoterminowe wymaga architektury wieloprocesorowej\n[ ] TAK\n[X] NIE","Planowanie dlugoterminowe bezposrednio decyduje o wyborze procesow, ktore nalezy wczytac do\npamieci\n[X] TAK\n[ ] NIE","Planowanie dlugoterminowe okresla procesy, ktore nalezy utworzyc\n[X] TAK\n[ ] NIE","Spooling to technika przydzielania dodatkowych buforow procesom uprzywilejowanym\n[ ] TAK\n[X] NIE",
+"Spooling to technika kopiowania w tle danych z nosnika papierowego na szybszy magnetyczny\n[X] TAK\n[ ] NIE","Spooling to technika programowania, zmniejszjaca pamiec wymagana do wykonania programu\n[ ] TAK\n[X] NIE","Spooling eliminuje fragmentacje zewnetrzna dyskow przez przesuwanie plikow w trakcie normalnej\npracy komputera (w tle)\n[ ] TAK\n[X] NIE","Spooling eliminuje fragmentacje zewnetrzna dyskow przez przesuwanie plikow, przy czym\nuruchamiany jest przy\n[ ] TAK\n[X] NIE","Spooling wylaczonych wszystkich innych procesach\n[ ] TAK\n[X] NIE","Spooling to metoda buforowania dysku bazujaca na tworzeniu duzych puli buforow systemowych\n[ ] TAK\n[X] NIE","Spooling to metoda buforowania dysku w szybkich pamieciach wbudowanych do sterownika\n[ ] TAK\n[X] NIE","Spooling polega na zapisie danych wyjsciowych z programu na szybkie nosniki magnetyczne i\ndrukowaniu ich w tle po zakonczeniu programu\n[X] TAK\n[ ] NIE","W unixie wystepuje katalog, dostepny przez sciezke ./ jest to katalog roboczy procesu\n[X] TAK\n[ ] NIE","W unixie wystepuje katalog, dostepny przez sciezke ./ jest to katalog nadrzedny\n[ ] TAK\n[X] NIE","W unixie wystepuje katalog, dostepny przez sciezke ./ jest to katalog glowny, jeden dla calego\nsystemu\n[ ] TAK\n[X] NIE","W unixie wystepuje katalog, dostepny przez sciezke ./ kazdy proces moze miec swoj taki katalog\n[X] TAK\n[ ] NIE","W unixie wystepuje katalog, dostepny przez sciezke ./ proces musi miec prawa zapisu w tym\nkatalogu, aby mogl sie wykonywac\n[ ] TAK\n[X] NIE","Katalog glowny systemu plikow w unixie jest plikiem zawierajacym rekordy z nazwami i numerami\ninodeĂ\xadow nalezacych do niego plikow\n[X] TAK\n[ ] NIE","Katalog glowny systemu plikow w unixie jest plikiem zawierajacym rekordy z nazwami, innymi\natrybutami i tablicami indeksowymi nalezacych do niego plikow\n[ ] TAK\n[X] NIE","Katalog glowny systemu plikow w unixie nie ma nazwy, definiowany jest przez zapisanie numeru jego\ninodeĂ\xadu w superbloku\n[ ] TAK\n[X] NIE","Katalog glowny systemu plikow w unixie nie ma nazwy, zajmuje zawsze to samo miejsce na partycji\ndysku (w systemie plikow)\n[ ] TAK\n[X] NIE","Katalog glowny systemu plikow w unixie ma ograniczona wielkosc, poniewaz umieszczony jest w\ncalosci w superbloku\n[ ] TAK\n[X] NIE","Katalog glowny systemu plikow w unixie nie zawiera pozycji .. (normalnie wskazujacej na katalog\nnadrzedny)\n[ ] TAK\n[X] NIE","Katalog glowny systemu plikow w unixie nie zawiera pozycji . i .. (normalnie wskazujacych na katalog\nbiezacy i nadrzedny)\n[ ] TAK\n[X] NIE","Katalog glowny systemu plikow w unixie zawiera stala liczbe pozycji, ktorej nie mozna zmienic bez\nrekompilacji jadra systemu\n[ ] TAK\n[X] NIE","Katalog glowny systemu plikow w unixie musi miec taka sama zawartosc, jak katalog do ktorego jest\nmontowany\n[ ] TAK\n[X] NIE","Katalog biezacy w unixie jest plikiem zawierajacym rekordy z nazwami i numerami inodeĂ\xadow\nnalezacych do niego plikow\n[X] TAK\n[ ] NIE","Katalog biezacy w unixie ma ograniczona wielkosc, poniewaz umieszczony jest w calosci w\nsuperbloku\n[ ] TAK\n[X] NIE","Katalog biezacy w unixie nie zawiera pozycji . i ..\n[ ] TAK\n[X] NIE","Katalog biezacy w unixie uzytkwnik nie moze zmienic go, jezeli nie ma uprawnien root\n[ ] TAK\n[X] NIE","Powloka systemu operacyjnego okresla dostepny zestaw i skladnie komend sterujacych\n[X] TAK\n[ ] NIE","Powloka systemu operacyjnego okresla dostepny zestaw i skladnie komend zewnetrznych\n[ ] TAK\n[X] NIE","Powloka systemu operacyjnego okresla dostepny zestaw i skladnie komend wewnetrznych\n[X] TAK\n[ ] NIE","Powloka systemu operacyjnego okresla zmienne srodowiskowe dla uruchamianych komend\n[X] TAK\n[ ] NIE","Powloka systemu operacyjnego okresla jezyk programowania skryptow systemowych\n[X] TAK\n[ ] NIE","Powloka systemu operacyjnego pozwala na edytowanie linii komendy\n[X] TAK\n[ ] NIE","Powloka systemu operacyjnego pozwala na przegladanie historii wykonywanych komend\n[X] TAK\n[ ] NIE","Listy kontroli dostepu ACL w windows NT sluza do okreslania warunkow logowania uzytkownikow do\nsystemu\n[ ] TAK\n[X] NIE","Listy kontroli dostepu ACL w windows NT sluza do okreslania warunkow dostepu do plikow dla\nroznych uzytkownikow\n[X] TAK\n[ ] NIE","Listy kontroli dostepu ACL w windows NT pozwalaja definiowac grupy uzytkownikow\n[X] TAK\n[ ] NIE","Listy kontroli dostepu ACL w windows NT pozwalaja definiowac klucze dostepu do zasobow\n[ ] TAK\n[X] NIE","Listy kontroli dostepu ACL w windows NT umozliwiaja zdefiniowanie obiektow, do ktorych dostep\nmusi byc odnotowany\n[X] TAK\n[ ] NIE","Plik MFT (Master file table) w systemie plikow NTFS sluzy do okreslania uprawnien dostepu do plikow\n[ ] TAK\n[X] NIE","Plik MFT (Master file table) w systemie plikow NTFS sluzy do okreslania warunkow logowania\nuzytkownikow do sytemu\n[ ] TAK\n[X] NIE","Plik MFT (Master file table) w systemie plikow NTFS zawiera listy ACL wszystkich plikow\n[X] TAK\n[ ] NIE","Plik MFT (Master file table) w systemie plikow NTFS zawiera kopie boot sektora\n[ ] TAK\n[X] NIE","Plik MFT (Master file table) w systemie plikow NTFS zawiera opis wszystkich plikow w systemie\n[X] TAK\n[ ] NIE","Plik MFT (Master file table) w systemie plikow NTFS zawiera tablice partycji dysku\n[ ] TAK\n[X] NIE","Tablica FAT w systemie MS-DOS zawiera osobna pozycje dla kazdego rekordu fizycznego (sektora) w\npartycji dysku\n[ ] TAK\n[X] NIE","Tablica FAT w systemie MS-DOS zawiera informacje o defektach nosnika w pamieci dyskowej\n[X] TAK\n[ ] NIE","Tablica FAT w systemie MS-DOS pozwala przydzielac rekordy rezerwowe w miejsce uszkodzonych\n[ ] TAK\n[X] NIE","Tablica FAT w systemie MS-DOS zastepuje mape zajetosci dysku\n[X] TAK\n[ ] NIE","Semafory binarne sluza do wyznaczania czasu w systemach czasu rzeczywistego\n[ ] TAK\n[X] NIE","Semafory binarne sluza do synchronizacji procesow wspolbieznych\n[X] TAK\n[ ] NIE","Semafory binarne sluza do blokowania dostepu do dysku w trybie binarnym (nie znakowym)\n[ ] TAK\n[X] NIE","Semafory binarne sa to struktury danych do modelowania ruchu ulicznego\n[ ] TAK\n[X] NIE","Semafory binarne sa to dane jednobitowe, ktore mozna testowac, ustawiac i zerowac\n[X] TAK\n[ ] NIE","Semafory binarne sa to dane calkowitoliczbowe z zakresu 0 - 2n (n>1) z niepodzielnymi operacjami p i\nV\n[ ] TAK\n[X] NIE","Semafory binarne mozna uzywac do rozwiazywania dowolnych problemow synchronizacji procesow\n[X] TAK\n[ ] NIE","W semaforach dijkstry operacja czekaj na tych semaforach zawsze usypia procesy\n[X] TAK\n[ ] NIE","W semaforach dijkstry operacja sygnalizuj na tych semaforach moze usypiac procesy\n[ ] TAK\n[X] NIE","Semafory dijkstry sa mechanizmem ograniczajacym dostep do plikow\n[ ] TAK\n[X] NIE","Semafory dijkstry sluza do synchronizacji procesow\n[X] TAK\n[ ] NIE","Semafory dijkstry sluza do synchronizacji procesow wspolbieznych\n[X] TAK\n[ ] NIE","Semafory dijkstry to struktury danych do modelowania ruchu ulicznego\n[ ] TAK\n[X] NIE","Semafory dijkstry sa mechanizmem synchronizujacym dostep do plikow\n[X] TAK\n[ ] NIE","Semafory dijkstry sa to dane calkowitoliczbowe, na ktorych zdefiniowane sa operacje p i V\n[X] TAK\n[ ] NIE","Semafory dijkstry sa to flagi dwustanowe, na ktorych zdefiniowane sa nieprzerywalne operacje p i V\n[ ] TAK\n[X] NIE","Semafory dijkstry mozna uzywac do rozwiazywania dowolnych problemow synchronizacji procesow\n[X] TAK\n[ ] NIE","Semafory dijkstry w ich implementacji stosuje sie petle goracego czekania\n[ ] TAK\n[X] NIE","Kontekst procesu okresla wszystkie zasoby, z ktorych moze proces korzystac\n[ ] TAK\n[X] NIE","Kontekst procesu okresla wszystkie procesy, z ktorymi moze sie komunikowac\n[ ] TAK\n[X] NIE","Kontekst procesu okresla zawartosc rejestrow, z ktorych proces moze korzystac\n[X] TAK\n[ ] NIE","Kontekst procesu obejmuje informacje konieczne do wznowienia procesu zablokowanego\n[X] TAK\n[ ] NIE","Kontekst procesu obejmuje informacje konieczne do ustalenia procesu nadrzednego\n[ ] TAK\n[X] NIE","Kontekst procesu jest to obraz pamieci procesu w pewnej chwili\n[ ] TAK\n[X] NIE","Kontekst procesu jest to miedzy innymi obraz pamieci procesu w chwili wstrzymania\n[ ] TAK\n[X] NIE","Kontekst procesu obejmuje informacje konieczne do wznowienia procesu wstrzymanego\n[X] TAK\n[ ] NIE","Kontekst procesu jest to obraz plikow otwartych przez proces w pewnej chwili\n[ ] TAK\n[X] NIE","Kontekst procesu jest to obraz pamieci, rejestrow i zmiennych systemowych procesu w pewnej chwili\n[ ] TAK\n[X] NIE","Kontekst procesu jest skladowany gdy proces sie konczy (wykonuje exit)\n[ ] TAK\n[X] NIE","Kontekst procesu jest odtwarzany przy kazdym przelaczeniu procesow\n[ ] TAK\n[X] NIE","Kontekst procesu opisuje zaleznosc pomiedzy wspolbieznymi procesami\n[ ] TAK\n[X] NIE","Procesy charakteryzuja sie sekwencyjnym wykonywaniem operacji\n[X] TAK\n[ ] NIE","Procesy charakteryzuja sie kontekstem, ktory okresla jakie procesy sa wykonywane wspolbieznie\n[ ] TAK\n[X] NIE","Procesy charakteryzuja sie zlozonoscia obliczeniowa, wyrazona np. przez liczbe petli, skokow i\nrozgalezien (Nie wiadomo do konca)\n[X] TAK\n[ ] NIE","Procesy charakteryzuja sie mozliwoscia przerywania i wznawiania wykonania (wedlug skladowanego\nkontekstu)\n[X] TAK\n[ ] NIE","Proces moze przejsc do stanu gotowosci po wyczerpaniu kwantu czasu aktywnosci (w systemie z\nalgorytmem karuzelowym)\n[ ] TAK\n[X] NIE","Proces moze przejsc do stanu gotowosci w wyniku wykonania funkcji exit (w unixie)\n[ ] TAK\n[X] NIE","Proces moze przejsc do stanu gotowosci bezposrednio ze stanu zablokowania\n[X] TAK\n[ ] NIE","Proces moze przejsc do stanu zablokowania (uspienia) po wyczerpaniu kwantu czasu aktywnosci (w\nsystemie z algorytmem karuzelowym)\n[X] TAK\n[ ] NIE","Proces moze przejsc do stanu zablokowania (uspienia) w wyniku wykonania funkcji exit (w unixie)\n[ ] TAK\n[X] NIE","Proces moze przejsc do stanu zablokowania (uspienia) bezposrednio ze stanu gotowosci\n[ ] TAK\n[X] NIE","Ochrona pamieci w systemach operacyjnych ogranicza dostep procesow do pamieci systemu\noperacyjnego\n[X] TAK\n[ ] NIE","Ochrona pamieci w systemach operacyjnych ogranicza dostep procesow do pamieci im nie\nprzydzielonej\n[X] TAK\n[ ] NIE","Ochrona pamieci w systemach operacyjnych zapewnia, ze inne procesy nie maja dostepu do pamieci\nprocesu\n[X] TAK\n[ ] NIE","Ochrona pamieci w systemach operacyjnych zapewnia, ze procesy uzytkowe nie moga zmodyfikowac\nobrazu pamieci systemu oper.\n[X] TAK\n[ ] NIE","Ochrona pamieci w systemach operacyjnych bazuje na przeksztalcaniu adresow logicznych na\nfizyczne, kontrolowanym przez sO\n[X] TAK\n[ ] NIE","Ochrona pamieci w systemach operacyjnych bazuje na szyfrowaniu zawartosci pamieci\n[ ] TAK\n[X] NIE","Ochrona pamieci w systemach operacyjnych okresla prawa dostepu procesow do plikow roznych\nwlascicieli\n[ ] TAK\n[X] NIE","Ochrona pamieci w systemach operacyjnych okresla prawa dostepu procesow do folderow poczty\nelektronicznej\n[ ] TAK\n[X] NIE","Stronnicowanie na zadanie to podstawowa technika zwiekszania pamieci widzianej przez programy\n[X] TAK\n[ ] NIE","Stronnicowanie na zadanie to podstawowa technika przyspieszenia dostepu do pamieci\n[ ] TAK\n[X] NIE","Stronnicowanie na zadanie polega na skladowaniu na dysk calego obrazu pamieci zablokowanego\nprocesu\n[ ] TAK\n[X] NIE","Stronnicowanie na zadanie polega na buforowaniu stron pamieci w pamieci podrecznej cache\n[ ] TAK\n[X] NIE","Stronnicowanie na zadanie wymaga dodatkowych pol w tablicy stron (np. flagi waznosci)\n[X] TAK\n[ ] NIE","Stronnicowanie na zadanie wymaga utrzymywania w pamieci tablicy stron\n[X] TAK\n[ ] NIE","Stronnicowanie pamieci polega na przydziale do programu ramek pamieci o stalej wielkosci\n[X] TAK\n[ ] NIE","Stronnicowanie pamieci polega na przydziale do programu segmentow pamieci dowolnej wielkosci\n[ ] TAK\n[X] NIE","Stronnicowanie pamieci wymaga tworzenia obrazu pamieci w obszarze wymiany na dysku\n[ ] TAK\n[X] NIE","Stronnicowanie pamieci pozwala implementowac liniowy model adresow fizycznych w programie\n[ ] TAK\n[X] NIE",
+"Stronnicowanie pamieci pozwala implementowac liniowy model adresow logicznych w programie\n[X] TAK\n[ ] NIE",
+"Pamiec stronnicowania charakteryzuje sie tym, ze adresy logiczne sa tworzone jako suma adresu\nbazowego i przesuniecia\n[ ] TAK\n[X] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze adresy fizyczne sa sklejeniem pary liczb\nokreslajacych numer ramki stalej dlugosci oraz przesuniecia (offset) w obrebie ramki\n[X] TAK\n[ ] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze adres logiczny jest zlozeniem numeru strony i\nprzesuniecia wzgledem jej poczatku\n[X] TAK\n[ ] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze jezeli strona nie ma przydzielonej ramki fizycznej,\nto wystepuje ablad stronyE; brak przydzialu jest\n[X] TAK\n[ ] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze oznaczony w tablicy stron flaga poprawnosci (valid)\n[ ] TAK\n[X] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze jezeli strona nie ma przydzielonej ramki fizycznej,\nto wystepuje ablad stronyE; brak przydzialu jest oznaczony w tablicy stron bitem ochrony (access\ncontrol)\n[ ] TAK\n[X] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze jezeli strona nie ma przydzielonej ramki fizycznej,\nto wystepuje ablad stronyE; brak przydzialu jest oznaczony w tablicy stron bitem modyfikacji\n(modified flag)\n[ ] TAK\n[X] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze jest technika pozwalajaca przydzielac programom\nwiecej pamieci, niz jest fizycznie zainstalowane w systemie\n[ ] TAK\n[X] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze jest technika pozwalajaca przydzielac programom\npamiec blokami stalej wielkosci (stronami)\n[X] TAK\n[ ] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze adres logiczny jest przeksztalcany na adres fizyczny\nprzez odczytanie numeru ramki z tablicy stron, z pozycji odpowiadajacej numerowi strony\n[X] TAK\n[ ] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze jest technika pozwalajaca przydzielac programom\npamiec blokami zmiennej wielkosci\n[ ] TAK\n[X] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze Eliminuje fragmentacje zewnetrzna pamieci\n[X] TAK\n[ ] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze Eliminuje fragmentacje wewnetrzna pamieci\n[ ] TAK\n[X] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze musi byc realizowa z wykorzystaniem pamieci\nasocjacyjnej na tablice stron\n[ ] TAK\n[X] NIE","Pamiec stronnicowania charakteryzuje sie tym, ze powoduje, ze programy maja nieliniowa przestrzen\nadresowa (fizyczna tak, logiczna nie)\n[X] TAK\n[ ] NIE",
+"Pamiec stronnicowania charakteryzuje sie tym, ze wymaga implementacji tablicy segmentow\n(sprzetowo lub programowo)\n[ ] TAK\n[X] NIE","Blokada systemu wystepuje, gdy dwa procesy probuja rownoczesnie pisac do tego samego pliku\n[ ] TAK\n[X] NIE","Blokada systemu wystepuje, gdy dwa procesy probuja rownoczesnie pisac do tego gniazda\nsieciowego\n[ ] TAK\n[X] NIE","Blokada systemu wystepuje tylko w systemach operacyjnych napisanych z bledami\n[ ] TAK\n[X] NIE","Blokada systemu wystepuje tylko w systemach operacyjnych wieloprogramowych\n[X] TAK\n[ ] NIE","Blokade systemu mozna usunac przez wymuszenie zakonczenia wszystkich procesow uspionych\n[X] TAK\n[ ] NIE","Blokade systemu mozna usunac przez czasowe zablokowanie dostepu uzytkownikow do systemu\n[ ] TAK\n[X] NIE","Warunki konieczne do wystapienia blokady to wystepowanie zasobow, ktore nie moga byc\nrownoczesnie wykorzystywane przezwiele procesow\n[X] TAK\n[ ] NIE","Warunki konieczne do wystapienia blokady to brak priorytetow w dostepie do zasobow\n[ ] TAK\n[X] NIE","Warunki konieczne do wystapienia blokady to przelaczanie procesow wedlug algorytmu planowania z\nwywlaszczaniem\n[ ] TAK\n[X] NIE","Warunki konieczne do wystapienia blokady to przelaczanie procesow wedlug algorytmu bez\nwywlaszczania\n[X] TAK\n[ ] NIE","Warunki konieczne do wystapienia blokady to przetrzymywanie i oczekiwanie, tzn. pozwolenie\nprocesom nie bedacym aktywnymi ani gotowymi na zachowanie przydzialu zasobu\n[X] TAK\n[ ] NIE","Warunki konieczne do wystapienia blokady to brak mechanizmu, ktory umozliwialby proceson\nprzyjecie zasobow przydzielonych innym\n[X] TAK\n[ ] NIE","Warunki konieczne do wystapienia blokady to wystepowanie zasobow, ktore nie moga byc\nwspoldzielone\n[X] TAK\n[ ] NIE","Warunki konieczne do wystapienia blokady to brak mechanizmu umozliwiajacego wywlaszczanie\nzasobow od procesow\n[X] TAK\n[ ] NIE","Warunki konieczne do wystapienia blokady to okreslaja, jak pisac programy wielowatkowe aby\nunikac bloakd\n[ ] TAK\n[X] NIE","Warunki konieczne do wystapienia blokady to okreslaja, jak pisac programy wieolprocesowe aby\nunikac bloakd\n[ ] TAK\n[X] NIE","Warunki konieczne do wystapienia blokady to okreslaja, kiedy proces moze przejsc do stanu\nzablokowania\n[ ] TAK\n[X] NIE","Warunki konieczne do wystapienia blokady to mozliwosc zawieszania procesow z przydzielonymi\npewnymi zasobami\n[X] TAK\n[ ] NIE","Funkcja systemowa wait w unixie zawiesza wykonywanie procesu w oczekiwaniu na zakonczenie\nprocesu potomnego\n[X] TAK\n[ ] NIE","Funkcja systemowa wait w unixie zawiesza wykonywanie procesu przez zadany argumentem czas\n[ ] TAK\n[X] NIE","Funkcja systemowa wait w unixie moze byc wykonywana tylko przez procesy daemony\n[ ] TAK\n[X] NIE","Funkcja systemowa wait w unixie moze byc wykonywana tylko przez proces z uprawnieniami root\n[ ] TAK\n[X] NIE","Funkcja systemowa wait w unixie umozliwia czekanie na zakonczenie operacji sieciowych\n[X] TAK\n[ ] NIE","Funkcja systemowa wait w unixie umozliwia czekanie na zakonczenie operacji we/wy\n[X] TAK\n[ ] NIE","Technika opoznionego zapisu na dysk w systemie unix jest metu sieciowym\n[X] TAK\n[ ] NIE","Technika opoznionego zapisu na dysk w systemie unix jest metoda synchronizacji zapisow na dysku\n[ ] TAK\n[X] NIE","Technika opoznionego zapisu na dysk w systemie unix polega na wprowadzeniu petli opozniajacej\nmiedzy kolejnymi rozkazami zapisu\n[X] TAK\n[ ] NIE","Technika opoznionego zapisu na dysk w systemie unix polega na zapisie bufora na dysk, w chwili jego\nzwalniania\n[ ] TAK\n[X] NIE","Technika opoznionego zapisu na dysk w systemie unix moze byc wybiorczo stosowana przez\nprogramowe wlaczanie/wylaczanie funkcja fctl\n[ ] TAK\n[X] NIE","Technika opoznionego zapisu na dysk w systemie unix moze byc wylaczana komenda fctl\n[ ] TAK\n[X] NIE","Buforowanie operacji dyskowych w systemie unix jest ograniczone do urzadzen z niewymiennym\nnosnikiem (np. twardych dyskow); dostep do plikow na dyskietkach nie moze byc buforowany\n[ ] TAK\n[X] NIE","Buforowanie operacji dyskowych w systemie unix redukuje czas dostepu do plikow oraz liczbe\nfizycznych operacji we/wy\n[X] TAK\n[ ] NIE","Buforowanie operacji dyskowych w systemie unix utrudnia rownoczesny dostep do rekordow pliku\nprzez wiele procesow (recordlocking)\n[X] TAK\n[ ] NIE","Buforowanie operacji dyskowych w systemie unix wymaga od programisty uzywania operacji fflush\naby miec pewnosc, ze zmiany w pliku zostana natychmiast zapisane na dysk\n[ ] TAK\n[X] NIE","Sygnaly w systemie unix wykorzystywane sa do synchronizacji procesow\n[X] TAK\n[ ] NIE","Sygnaly w systemie unix wykorzystywane sa m.in. do zabijania procesow\n[X] TAK\n[ ] NIE","Sygnaly w systemie unix moga byc adresowane do wszystkich procesow uzytkownika o znanym uID\n[X] TAK\n[ ] NIE","Sygnaly w systemie unix moga byc adresowane do wszystkich procesow uspionych w systemie\n[ ] TAK\n[X] NIE","Sygnaly w systemie unix mozna definiowac wlasne funkcje obslugi niektorych z nich\n[X] TAK\n[ ] NIE","Sygnaly w systemie unix proces mozna zaprogramowac tak, aby ignorowal wszystkie sygnaly\nprzychodzace\n[ ] TAK\n[X] NIE","Sygnaly w systemie unix wysylane moga byc przez kazdy proces przy pomocy funkcji signal\n[ ] TAK\n[X] NIE","Sygnaly w systemie unix wysylane moga byc przez kazdy proces przy pomocy funkcji kill\n[X] TAK\n[ ] NIE","Fragmentacja wewnetrzna dysku jest wynikiem niedopasowania rozmiaru plikow do wielkosci\nobszarow wolnych (powstajacych przy kasowaniu plikow)\n[X] TAK\n[ ] NIE","Fragmentacja wewnetrzna dysku jest wynikiem niedopasowania rozmiaru plikow do wielokrotnosci\nwielkosci blokow alokacji\n[X] TAK\n[ ] NIE","Fragmentacja wewnetrzna dysku jest wynikiem przydzialu miejsca na dysku porcjami zmiennej\nwielkosci\n[ ] TAK\n[X] NIE","Fragmentacja wewnetrzna dysku moze byc wyeliminowana przez program defragmentujacy\n[ ] TAK\n[X] NIE","Fragmentacja wewnetrzna dysku jest wynikiem pozostawania niewykorzystanych fragmentow w\nostatnich blokach plikow\n[X] TAK\n[ ] NIE","Fragmentacja wewnetrzna dysku jest wynikiem przydzialu miejsca na dysku porcjami stalej wielkosci\n[X] TAK\n[ ] NIE","Fragmentacja wewnetrzna dysku jest wynikiem braku konserwacji systemu plikow - moze byc\nwyeliminowana przez program defragmentujacy\n[ ] TAK\n[X] NIE","Fragmentacja wewnetrzna dysku jest wynikiem braku konserwacji systemu plikow (brak\ndefragmentacji)\n[ ] TAK\n[X] NIE","Fragmentacja wewnetrzna dysku jest wynikiem bledow programowych np. nie zamkniecia pliku\nprzed zakonczeniem programu\n[ ] TAK\n[X] NIE","Fragmentacja wewnetrzna dysku powoduje lepsze wykorzystanie miejsca w pamieci przez procesy\n[ ] TAK\n[X] NIE","Fragmentacja wewnetrzna dysku jest wynikiem przydzialu pamieci porcjami stalej wielkosci\n(stronami)\n[X] TAK\n[ ] NIE","Fragmentacja wewnetrzna dysku wystepuje jedynie w systemach z pamiecia wirtualna\n[ ] TAK\n[X] NIE","Fragmentacja wewnetrzna dysku jest wynikiem niedopasowania rozmiaru segmentow pamieci do\nwielokrotnosci wielkosci ramki\n[ ] TAK\n[X] NIE","Fragmentacja wewnetrzna dysku moze byc wyeliminowana przez relokacje programow\n[ ] TAK\n[X] NIE","Fragmentacja wewnetrzna dysku jest wynikiem bledow programowych np. nie zwalniania pamieci\nprzed zakonczeniem programu\n[ ] TAK\n[X] NIE","Fragmentacja zewnetrzna pamieci jest wynikiem niedopasowania rozmiaru segmentow pamieci do\nwielokrotnosci wielkosci ramki\n[ ] TAK\n[X] NIE","Fragmentacja zewnetrzna pamieci moze byc wyeliminowana przez relokacje programow\n[X] TAK\n[ ] NIE","Fragmentacja zewnetrzna pamieci jest wynikiem bledow programowych np. nie zwalniania pamieci\nprzed zakonczeniem programu\n[ ] TAK\n[X] NIE","Algorytm przelaczania procesow w systemie unix jest algorytmem ze stalym priorytetem\nzewnetrznym, zadawanym komenda/funkcja nice\n[X] TAK\n[ ] NIE","Algorytm przelaczania procesow w systemie unix jest algorytmem bez wywlaszczen\n[ ] TAK\n[X] NIE","Algorytm przelaczania procesow w systemie unix jest algorytmem z wywlaszczeniem procesow\nsystemowych i uzytkowych\n[ ] TAK\n[X] NIE","Algorytm przelaczania procesow w systemie unix jest algorytmem, w ktorym wywlaszczane sa tylko\nprocesy uzytkownika\n[X] TAK\n[ ] NIE","Algorytm przelaczania procesow w systemie unix jest algortmem priorytetowym, w ktorym priorytet\njest wewnetrznie zmieniany w trakcie wykonywania procesu\n[X] TAK\n[ ] NIE","Algorytm przelaczania procesow w systemie unix jest algorytmem z wywlaszczeniem\n[X] TAK\n[ ] NIE","Algorytm przelaczania procesow w systemie unix opiera sie na priorytecie statycznym, wyliczanym w\nopraciu o wykorzystanie procesora przez proces\n[ ] TAK\n[X] NIE","Algorytm przelaczania procesow w systemie unix opiera sie na priorytecie dynamicznym, obnizanym\ndla procesow intensywnych obliczeniowo, a podwyzszanym dla procesow interakcyjnych\n[X] TAK\n[ ] NIE","Algorytm przelaczania procesow w systemie unix pozwala modyfikowac priorytet procesu przy\npomocy funkcji nice\n[X] TAK\n[ ] NIE","Algorytm karuzelowy przelaczania procesow jest algorytmem bez wywlaszczenia\n[ ] TAK\n[X] NIE","Algorytm karuzelowy przelaczania procesow jest algorytmem z wywlaszczeniem\n[X] TAK\n[ ] NIE","Algorytm karuzelowy przelaczania procesow przelacza procesy wedlug dynamicznie zmienianego\npriorytetu\n[ ] TAK\n[X] NIE","Algorytm karuzelowy przelaczania procesow jest najczesciej wykorzystywanym algorytmem w\nroznych wersjach systemu operacyjnego unix\n[ ] TAK\n[X] NIE","Algorytm karuzelowy przelaczania procesow polega na uruchamianiu procesow na staly kwant czasu i\nwymuszaniu przelaczenia kontekstu, jezeli proces nie zwolni procesora w tym czasie\n[X] TAK\n[ ] NIE","Algorytm karuzelowy przelaczania procesow jest algorytmem optymalnym, w praktyce niemozliwym\ndo zrealizowania\n[ ] TAK\n[X] NIE","Algorytmy przelaczania procesow z wywlaszczeniem moga wykorzystywac priorytety stale lub\nzmieniajace sie dynamicznie\n[X] TAK\n[ ] NIE","Algorytmy przelaczania procesow z wywlaszczeniem zwiekszaja wspolczynnik wykorzystania\nprocesora w systemach wielodostepnych\n[ ] TAK\n[X] NIE","Algorytmy przelaczania procesow z wywlaszczeniem polega na uruchamianiu procesow na staly\nkwant czasu i wymuszaniu przelaczenia kontekstu, jezeli proces nie zwolni procesora w tym czasie\n[X] TAK\n[ ] NIE","Algorytm fIFO zastepowania stron pamieci gwarantuje najmniejsza mozliwa liczbe bledow stron\n[ ] TAK\n[X] NIE","Algorytm fIFO zastepowania stron pamieci gwarantuje najkrotszy czas dostepu do pamieci\n[ ] TAK\n[X] NIE","Algorytm fIFO zastepowania stron pamieci zapewnia, ze liczba bledow stron (dla tych samych\nprocesow) nie zwiekszy sie, gdy doinstalujemy (udostepnimy) dodatkowe ramki pamieci fizycznej\n[ ] TAK\n[X] NIE","Algorytm fIFO zastepowania stron pamieci polega na usuwaniu stron, ktore najdluzej przebywaly w\npamieci fizycznej\n[X] TAK\n[ ] NIE","Algorytm fIFO zastepowania stron pamieci polega na usuwaniu stron, ktore najdawniej byly uzywane\n[ ] TAK\n[X] NIE","Algorytm lRU (najdawniej uzywana) zastepowania stron pamieci gwarantuje najmniejsza mozliwa\nliczbe bledow stron\n[ ] TAK\n[X] NIE","Algorytm lRU (najdawniej uzywana) zastepowania stron pamieci zapewnia, ze liczba bledow stron\n(dla tych samych procesow) nie zwiekszy sie, gdy doinstalujemy (udostepnimy) dodatkowe ramki\npamieci fizycznej\n[X] TAK\n[ ] NIE","Algorytm lRU (najdawniej uzywana) zastepowania stron pamieci polega na usuwaniu stron, ktore\nnajdluzej przebywaly w pamieci fizycznej\n[ ] TAK\n[X] NIE","Systemy wielodostepne wymagaja architektury wieloprocesorowej\n[ ] TAK\n[X] NIE","Systemy wielodostepne wymagaja architektury jednoprocesorowej\n[ ] TAK\n[X] NIE",
+"Systemy wielodostepne pozwalaja na wykonywanie wielu zadan wspolbieznie\n[X] TAK\n[ ] NIE","Systemy wielodostepne pozwalaja na wspolbiezne przetwarzanie wielu procesow (jednego lub wielu\nuzytkownikow)\n[X] TAK\n[ ] NIE","Systemy wielodostepne zapewniaja dostep wszystkich uzytkownikow do identycznych danych\n[X] TAK\n[ ] NIE","Systemy wielodostepne pozwalaja na przesylanie sobie poczty w obrebie systemu\n[X] TAK\n[ ] NIE","Systemy wielodostepne wymuszaja prace wsadowa na komputerze\n[ ] TAK\n[X] NIE","Systemy wielodostepne wymagaja wielu terminali podlaczonych do jednego komputera\n[ ] TAK\n[X] NIE","Systemy wielodostepne dziela zadania na interakcyjne i wykonywane w tle\n[X] TAK\n[ ] NIE","Dynamiczne ladowanie programu polega na wykorzystaniu bibliotek dolaczanych w trakcie\nwykonywania programu\n[ ] TAK\n[X] NIE","Dynamiczne ladowanie programu polega na ladowaniu nakladek programu, gdy sa potrzebne\n[X] TAK\n[ ] NIE","Dynamiczne ladowanie programu mozna zrealizowac w systemie ze stronnicowaniem na zadanie\n[X] TAK\n[ ] NIE","Dynamiczne laczenie programu polega na wykorzystaniu bibliotek dolaczanych w trakcie\nwykonywania programu\n[X] TAK\n[ ] NIE","Dynamiczne laczenie programu polega na ladowaniu nakladek programu, gdy sa potrzebne\n[ ] TAK\n[X] NIE","Dynamiczne laczenie programu mozna zrealizowac w systemie bez stronnicowania na zadanie\n[X] TAK\n[ ] NIE","Kryteriami rozwiazanie problemu sekcji krytycznej jest wzajemne wylaczanie - procesy musza miec\nmozliwosc wzajemnego blokowania\n[X] TAK\n[ ] NIE","Kryteriami rozwiazanie problemu sekcji krytycznej jest postep - dostep do sekcji nie moze byc\nzablokowany, jezeli nie przebywa w niej inny\n[X] TAK\n[ ] NIE","Kryteriami rozwiazanie problemu sekcji krytycznej jesr ograniczone czekanie - kazdy proces musi\nkiedys dostac sie do sekcji\n[X] TAK\n[ ] NIE","Dolaczenia w systemie plikow (links) oznaczone sa symbolem / w sciezkach dostepu\n[ ] TAK\n[X] NIE","Dolaczenia w systemie plikow (links) pozwalaja tworzyc systemy plikow o strukturze niehierarchicznej\n[X] TAK\n[ ] NIE","Dolaczenia w systemie plikow (links) sa wynikiem bledow w programie i polegaja na polaczenie sie\nlist alokacji odpowiadajacych roznym plikom w tablicy FAT\n[ ] TAK\n[X] NIE","Dolaczenia w systemie plikow (links) sa wynikiem bledow w programie i powstaja przy wielokrotnym\notwieraniu tych samych plikow do zapisu\n[ ] TAK\n[X] NIE","Dolaczenia w systemie plikow (links) wiaza nazwy plikow z INODEĂ\xadami w systemie unix\n[X] TAK\n[ ] NIE","Dolaczenia w systemie plikow (links) tworzone sa przy otwieraniu plikow, usuwane przy zamykaniu\n[ ] TAK\n[X] NIE","Dolaczenia w systemie plikow (links) moga byc symboliczne, gdy wskazuja sciezke dostepu do pliku\nwlasciwego, lub twarde, jezeli powstaja przez zdefiniowanie drugiej nazwy dla pliku\n[X] TAK\n[ ] NIE","Przetwarzanie potokowe w unixie realizowane jest przez przekierowanie standardowego wyjscia\nkomendy pierwszej do standardowego wejscia komendy drugiej\n[X] TAK\n[ ] NIE","Przetwarzanie potokowe w unixie w powloce sh mozna je wywolac wypisujac dwie komendy w\nnawiasach okraglych, rozdzielone przecinkami\n[X] TAK\n[ ] NIE","Przetwarzanie potokowe w unixie dostepne jest tylko w systemach wieloprocesorowych\n[ ] TAK\n[X] NIE","Proces uspiony (zablokowany) oczekuje na zwolnienie procesora przez proces aktywny\n[ ] TAK\n[X] NIE","Proces uspiony (zablokowany) realizuje operacje semaforowe\n[X] TAK\n[ ] NIE","Proces uspiony (zablokowany) zawsze usuwany jest z pamieci operacyjnej (kopiowany do obszaru\nwymiany)\n[ ] TAK\n[X] NIE","Stronicowanie na zadanie polega na wymianie stron w pamieci fizycznej, wczytywaniu stron, do\nktorych wystepuja aktualnie odwolania\n[X] TAK\n[ ] NIE","Stronicowanie na zadanie umozliwia zapisywanie do obszaru wymiany na dysku fragmentow\nkontekstow procesow, gdy brakuje pamieci fizycznej\n[X] TAK\n[ ] NIE","Mechanizm spotkaniowy to technika synchronizacji dostepu do pamieci wspoldzielonej przez procesy\n[X] TAK\n[ ] NIE","Mechanizm spotkaniowy wykorzystywany jest do przesylania danych pomiedzy procesami\n[X] TAK\n[ ] NIE","Mechanizm spotkaniowy wykorzystywany jest do negocjacji dostepu do plikow\n[ ] TAK\n[X] NIE","Warunek postepu w synchronizacji miedzy procesami to zapewnienie, ze dwa procesu nie znajda sie\nw tym samym czasie w sekcji krytycznej\n[ ] TAK\n[X] NIE","Warunek postepu w synchronizacji miedzy procesami to wymaganie, aby synchronizacja nie\npowodowala nieograniczonego w czasie zawieszenia procesu\n[X] TAK\n[ ] NIE","Warunek postepu w synchronizacji miedzy procesami zapewnia, ze proces nie jest wywlaszczany, gdy\nznajduje sie w sekcji krytycznej\n[ ] TAK\n[X] NIE","Planowanie zadan ma na celu unikanie blokad\n[ ] TAK\n[X] NIE","Planowanie zadan ma na celu synchronizowanie dostepu do zasobow\n[ ] TAK\n[X] NIE","Planowanie zadan ma na celu wybor procesu do aktywacji\n[X] TAK\n[ ] NIE","Funkcja systemowa fork w unixie (Linuxie) tworzy nowy proces, realizujacy program podany w\nargumencie do tej funkcji\n[ ] TAK\n[X] NIE","Funkcja systemowa fork w unixie (Linuxie) tworzy nowy watek, realizujacy funkcje podana w\nargumencie\n[ ] TAK\n[X] NIE","Funkcja systemowa fork w unixie (Linuxie) tworzy nowy proces, realizujacy ten sam program co\nproces-rodzic\n[X] TAK\n[ ] NIE","Sygnaly w systemie unix generowane sa wylacznie przez sterowniki urzadzen zewnĂŤtrznych\n[ ] TAK\n[X] NIE","Sygnaly w systemie unix wysylane sa do pojedynczych procesow, grup procesow, procesow\nokreslonego uzytkownika lub do wszystkich procesow\n[X] TAK\n[ ] NIE","Sygnaly w systemie unix moga byc ignorowane przez procesy (z wyjatkiem sygnalu 9)\n[ ] TAK\n[X] NIE","Pozycje katalogowe zawieraja nazwy plikow\n[X] TAK\n[ ] NIE","Pozycje katalogowe zawieraja informacje o polozeniu pliku na dysku\n[X] TAK\n[ ] NIE","Pozycje katalogowe zawieraja sume kontrolna pliku\n[ ] TAK\n[X] NIE","Sciezka do pliku moze byc wzgledna, bezwzgledna lub symboliczna\n[ ] TAK\n[X] NIE",
+"Sciezka do pliku jest sciezka wzgledna okreslajaca polozenie pliku wzgledem katalogu domowego\nuzytkownika\n[ ] TAK\n[X] NIE",
+"Sciezka do pliku jest sciezka bezwzgledna okreslaca polozenie pliku wzgledem katalogu glownego\n[X] TAK\n[ ] NIE","Sekcja krytyczna to technika synchronizacji dostepu do pamieci wspoldzielonej przez procesy\n[ ] TAK\n[X] NIE","Sekcja krytyczna wykorzystywana jest do ochrony danych przed rownoczesna ich modyfikacja przez\nprocesy wspolbiezne\n[X] TAK\n[ ] NIE","Sekcja krytyczna wykorzystywana jest do negocjacji dostepu do semaforow\n[ ] TAK\n[X] NIE","Wspolbieznosc w systemach operacyjnych realizowana jest przez przelaczanie procesow, tzn.\nwstrzymywanie procesow co pewien czas i pre innych\n[X] TAK\n[ ] NIE","Wspolbieznosc w systemach operacyjnych w powloce sh mozna ja wywolac wypisujac dwie komendy\nw nawiasach okraglych, rozdzielone przecinkami\n[ ] TAK\n[X] NIE","Wspolbieznosc w systemach operacyjnych dostepna jest tylko w systemach wieloprocesorowych\n[ ] TAK\n[X] NIE","Proces gotowy oczekuje na zwolnienie procesora przez proces aktywny\n[X] TAK\n[ ] NIE","Proces gotowy realizuje operacje drugoplanowe\n[ ] TAK\n[X] NIE","Proces gotowy czasami usuwany jest z pamieci operacyjnej (kopiowany do obszaru wymiany)\n[ ] TAK\n[X] NIE","Funkcja systemowa exec w unixie (Linuxie) tworzy nowy proces, realizujacy program podany w\nargumencie do tej funkcji\n[ ] TAK\n[X] NIE","Funkcja systemowa exec w unixie (Linuxie) tworzy nowy watek, realizujacy funkcje podana w\nargumencie\n[ ] TAK\n[X] NIE","Funkcja systemowa exec w unixie (Linuxie) modyfikuje kontekst wykonywanego procesu, korzystajac\nz pliku wykonywalnego podanego w argumencie\n[X] TAK\n[ ] NIE","Sygnaly w systemie unix generowane sa przez wykonanie operacji kill\n[X] TAK\n[ ] NIE","Sygnaly w systemie unix moga powodowac zakonczenie procesu\n[ ] TAK\n[X] NIE","Sygnaly w systemie unix moga byc wyslane do wielu procesow rownoczesnie\n[X] TAK\n[ ] NIE","Dowiazania symboliczne sa to pliki specjalne, ktore wskazuja na inne obiekty w systemie plikow\n[X] TAK\n[ ] NIE","Dowiazania symboliczne zawieraja informacje o polozeniu pliku na dysku\n[X] TAK\n[ ] NIE","Dowiazania symboliczne w unixie musza miec rozszerzenie .lnk\n[ ] TAK\n[X] NIE","Wzorce plikow sa mechanizmem definiowania dopuszczalnej zawartosci plikow\n[ ] TAK\n[X] NIE","Wzorce plikow pozwalaja definiowac sciezki wyszukiwania komend w systemach operacyjnych\n[X] TAK\n[ ] NIE","Wzorce plikow wykorzystuja znaki ? oraz * do okreslania dowolnych znakow w nazwie pliku\n[X] TAK\n[ ] NIE","Funkcja systemowa execve w unixie(Linuxie) tworzy nowy proces, realizujacy program podany w\nargumencie do tej funkcji\n[ ] TAK\n[X] NIE","Funkcja systemowa execve w unixie(Linuxie) tworzy nowy watek, realizujacy funkcje podana w\nargumencie\n[ ] TAK\n[X] NIE","Funkcja systemowa execve w unixie(Linuxie) tworzy nowy proces, realizujacy ten sam program co\nproces-rodzic\n[ ] TAK\n[X] NIE","Pozycje katalogowe w systemie unix zawieraja nazwy plikow\n[X] TAK\n[ ] NIE","Pozycje katalogowe w systemie unix zawieraja date modyfikacji pliku\n[X] TAK\n[ ] NIE","Pozycje katalogowe w systemie unix zawieraja rozszerzenie 3 - znakowe\n[ ] TAK\n[X] NIE","Stan procesu jest pamietany w tablicy procesow\n[X] TAK\n[ ] NIE","Stan procesu jest wyznaczany przy pierwszym uruchomieniu procesu i potem sie nie zmienia\n[ ] TAK\n[X] NIE","Stan procesu jezeli jest aktywny, to proces jest wykonywany przez procesor\n[X] TAK\n[ ] NIE","Sygnaly w systemie unix generowane sa wylacznie przez sterowniki urzadzen zewnetrznych\n[ ] TAK\n[X] NIE","Sygnaly w systemie unix wysylane sa do pojedynczych procesow lub do grup procesow\n[X] TAK\n[ ] NIE","Wiekszosc sygnalow w systemie unix moze byc ignorowana przez procesy\n[X] TAK\n[ ] NIE","Kanal komunikacyjny z ograniczonym buforowaniem to technika synchronizacji dostepu do karty\nsieciowej przez procesy\n[ ] TAK\n[X] NIE","Kanal komunikacyjny z ograniczonym buforowaniem wykorzystywany jest do przesylania danych\npomiedzy procesami\n[X] TAK\n[ ] NIE","Kanal komunikacyjny z ograniczonym buforowaniem moze spowodowac uspienie procesu piszacego\ndo kanalu\n[X] TAK\n[ ] NIE","Warunek wykluczania w synchronizacji miedzy procesami to zapewnienie, ze dwa procesy nie znajda\nsie w tym samym czasie w sekcji krytycznej\n[X] TAK\n[ ] NIE","Warunek wykluczania w synchronizacji miedzy procesami to wymaganie, aby synchronizacja nie\npowodowala nieograniczonego w czasie zawieszenia procesu\n[ ] TAK\n[X] NIE","Warunek wykluczania w synchronizacji miedzy procesami zapewnia, ze proces nie jest wywlaszczany,\ngdy znajduje sie w sekcji krytycznej\n[ ] TAK\n[X] NIE","Funkcja systemowa signal w unixie (Linuxie) tworzy nowy proces\n[ ] TAK\n[X] NIE","Funkcja systemowa signal w unixie (Linuxie) wysyla komunikat do standardowego strumienia bledow\n[ ] TAK\n[X] NIE","Funkcja systemowa signal w unixie (Linuxie) wysyla sygnal do procesu lub grupy procesow\n[ ] TAK\n[X] NIE","Algorytm karuzelowy zapewnia wszystkim procesom ten sam priorytet\n[X] TAK\n[ ] NIE","Algorytm karuzelowy nie pozwala wywlaszczac procesow systemowych\n[ ] TAK\n[X] NIE","Algorytm karuzelowy jest algorytmem z priorytetami dynamicznymi\n[ ] TAK\n[X] NIE","Algorytm lRU zastepowania stron pamieci wirtualnej polega na usuwaniu najdluzej zaladowanych\nstron\n[ ] TAK\n[X] NIE","Algorytm lRU zastepowania stron pamieci wirtualnej zapewnia dobre dostosowanie do zestawu\nroboczego stron\n[X] TAK\n[ ] NIE","Algorytm lRU zastepowania stron pamieci wirtualnej zapewnia zawsze najmniejsza liczbe bledow\nstron (w porownaniu z innymi algorytmami)\n[ ] TAK\n[X] NIE","Biblioteki laczone dynamicznie (DLL) ladowane sa do pamieci tylko funkcje, do ktorych wystapi\nodwolanie\n[X] TAK\n[ ] NIE","Biblioteki laczone dynamicznie (DLL) udostepniaja wylacznie funkcje wielowejsciowe (reentrant)\n[ ] TAK\n[X] NIE","Biblioteki laczone dynamicznie (DLL) kopiowane sa w calosci do plikow wykonywalnych,\nzawierajacych programy z nich korzystajace\n[ ] TAK\n[X] NIE","Buforowanie operacji dyskowych Eliminuje fragmentacje wewnetrzna w systemie plikow\n[ ] TAK\n[X] NIE","Buforowanie operacji dyskowych umozliwia zapis danych do pliku porcjami roznej wielkosci\n[X] TAK\n[ ] NIE","Buforowanie operacji dyskowych umozliwia zrownoleglenie procesow\n[ ] TAK\n[X] NIE","Dowiazania symboliczne w linuxie zawieraja informacje o polozeniu pliku na dysku\n[ ] TAK\n[X] NIE","Dowiazania symboliczne w linuxie musza miec rozszerzenie .ink\n[ ] TAK\n[X] NIE","Dowiazania symboliczne w linuxie sa to pliki specjalne, ktore wskazuja przy pomocy sciezek na inne\nobiekty\n[X] TAK\n[ ] NIE","Dynamiczne laczenie programu zmniejsza wielkosc pliku wykonywalnego (exe)\n[X] TAK\n[ ] NIE","Dynamiczne laczenie programu wykorzystuje biblioteki statyczne\n[ ] TAK\n[X] NIE","Dynamiczne laczenie programu polega na tworzeniu polaczen dynamicznych pomiedzy procesami\n[ ] TAK\n[X] NIE","Dynamiczne ladowanie programu polega na ladowaniu nakladek programu, gdy sa potrzebne\n[X] TAK\n[ ] NIE","Dynamiczne ladowanie programu polega na wykorzystaniu bibliotek dolaczanych w trakcie\nwykonywania programu\n[ ] TAK\n[X] NIE","Dynamiczne ladowanie programu zmniejsza czas od wydania komendy do uruchomienia programu\n[ ] TAK\n[X] NIE","Funkcja systemowa signal tworzy nowy proces\n[ ] TAK\n[X] NIE","Funkcja systemowa signal wysyla sygnal do procesu lub grupy procesow\n[ ] TAK\n[X] NIE","Funkcja systemowa signal wysyla komunikat do standardowego strumienia bledow\n[X] TAK\n[ ] NIE","Funkcja systemowa fork w unicie (Linuxie) tworzy nowy proces, realizujacy ten sam program co\nproces-rodzic\n[X] TAK\n[ ] NIE","Funkcja systemowa fork w unicie (Linuxie) tworzy nowy watek, realizujacy funkcje podana w\nargumencie\n[ ] TAK\n[X] NIE","Funkcja systemowa fork w unicie (Linuxie) tworzy nowy proces, realizujacy program podany w\nargumencie do tej funkcji\n[ ] TAK\n[X] NIE","Funkcja systemowa execve w unixie (Linuxie) laduje nowy program w miejsce obrazu pamieci\nprocesu, ktory wywolal te funkcje\n[X] TAK\n[ ] NIE","Funkcja systemowa execve w unixie (Linuxie) tworzy nowy proces, realizujacy program podany w\nargumencie do tej funkcji\n[ ] TAK\n[X] NIE","Funkcja systemowa execve w unixie (Linuxie) tworzy nowy watek, realizujacy funkcje podana w\nargumencie\n[ ] TAK\n[X] NIE","Kanal komunikacyjny z zerowym buforowaniem umozliwia buforowanie operacji dyskowych\n[ ] TAK\n[X] NIE","Kanal komunikacyjny z zerowym buforowaniem to kanal, w ktorym aktualnie nie ma zadnych\nkomunikatow\n[X] TAK\n[ ] NIE","Kanal komunikacyjny z zerowym buforowaniem moze powodowac uspienie procesu czytajacego z\nkanalu\n[ ] TAK\n[X] NIE","Kontekst procesu jest to obraz pamieci, rejestrow i zmiennych systemowych procesu w pewnej chwili\n[ ] TAK\n[X] NIE","Kontekst procesu obejmuje informacje konieczne do zablokowania procesu\n[ ] TAK\n[X] NIE","Kontekst procesu opisuje stan wszystkich zasobow, z ktorych moze proces korzystac\n[X] TAK\n[ ] NIE","Kanal komunikacyjny z nieograniczonym buforowaniem moze powodowac uspienie procesu\npiszacego do kanalu\n[ ] TAK\n[X] NIE","Kanal komunikacyjny z nieograniczonym buforowaniem moze powodowac uspienie procesu\nczytajacego z kanalu\n[ ] TAK\n[X] NIE","Kanal komunikacyjny z nieograniczonym buforowaniem umozliwia buforowanie operacji dyskowych\n[X] TAK\n[ ] NIE","Ogole semafory dijkstry przyjmuja tylko wartosci 0 lub 1\n[X] TAK\n[ ] NIE","Ogole semafory dijkstry moga blokowac proces przy wykonaniu operacji V\n[ ] TAK\n[X] NIE","Ogole semafory dijkstry moga blokowac proces przy wykonywaniu operacji p\n[X] TAK\n[ ] NIE","Ochrona pamieci w systemach operacyjnych okresla prawa dostepu procesow do pamieci dyskowej\n[ ] TAK\n[X] NIE","Ochrona pamieci w systemach operacyjnych zapewnia, ze procesy nie zostana zmodyfikowane w\ntrakcie kopiowania do obszaru wymiany (swapping)\n[ ] TAK\n[X] NIE","Ochrona pamieci w systemach operacyjnych uniemozliwia dostep procesu do niezaalokowanej\npamieci\n[X] TAK\n[ ] NIE","Przetwarzanie posrednie to technika przydzielania dodatkowych buforow procesom\nuprzywilejowanym\n[ ] TAK\n[X] NIE","Przetwarzanie posrednie eliminuje fragmentacje zewnetrzna dysku przez przesuwanie plikow w tle\n[ ] TAK\n[X] NIE","Przetwarzanie posrednie polega na kopiowaniu danych miedzy dyskiem a wolnymi urzadzeniami\nzewnetrznymi w celu poprawy wykorzystania procesora\n[X] TAK\n[ ] NIE","Przetwarzanie potokowe dostepne jest tylko w systemach wieloprocesorowych\n[ ] TAK\n[X] NIE","Przetwarzanie potokowe w powloce sh mozna je wywolac wypisujac dwie komendy w nawiasach\nokraglych rozdzielone przecinkami\n[ ] TAK\n[X] NIE","Przetwarzanie potokowe realizowane jest przez przekierowanie standardowego wyjscia komendy\npierwszej do standardowego wejscia komendy drugiej\n[X] TAK\n[ ] NIE","Przydzial indeksowy miejsca na dysku charakteryzuje sie fragmentacja zewnetrzna przestrzeni dysku\n[ ] TAK\n[X] NIE","Przydzial indeksowy miejsca na dysku wymaga zapisu tablicy indeksowej na dysku\n[X] TAK\n[ ] NIE","Przydzial indeksowy miejsca na dysku opisuje polozenie pliku jako ciag segmentow roznej wielkosci\n[ ] TAK\n[X] NIE","Proces moze przejsc do stanu zablokowania bezposrednio ze stanu aktywnosci\n[X] TAK\n[ ] NIE","Proces moze przejsc do stanu zablokowania w wyniku wykonania funkcji exit (w linuxie)\n[ ] TAK\n[X] NIE","Proces moze przejsc do stanu zablokowania po wyczerpaniu kwantu czasu aktywnosci\n[ ] TAK\n[X] NIE","Proces uspiony (zablokowany) zawsze usuwany jest z pamieci operacyjnej (kopiowany do obszaru\nwymiany)\n[ ] TAK\n[X] NIE","Proces uspiony (zablokowany) oczekuje az inny proces go zbudzi\n[X] TAK\n[ ] NIE","Proces uspiony (zablokowany) oczekuje na zwolnienie procesora przez procesor aktywny\n[ ] TAK\n[X] NIE","Powloka systemu operacyjnego okresla zestaw dostepnych jezykow programowania\n[ ] TAK\n[X] NIE",
+"Powloka systemu operacyjnego okresla dostepny zestaw komend wewnetrznych\n[ ] TAK\n[X] NIE","Powloka systemu operacyjnego pozwala definiowac zmienne srodowiskowe, przekazywane do\nuruchamianych programow\n[ ] TAK\n[X] NIE","Pozycje katalogowe w systemie FAT pozwalaja definiowac nazwy plikow dowolnej wielkosci\n[ ] TAK\n[X] NIE","Pozycje katalogowe w systemie FAT zawieraja informacje o polozeniu pliku na dysku\n[X] TAK\n[ ] NIE","Pozycje katalogowe w systemie FAT zawieraja sume kontrolna pliku\n[ ] TAK\n[X] NIE","Przydzial ciagly miejsca na dysku wymaga zapisu tablicy indeksowanej na dysku\n[ ] TAK\n[X] NIE","Przydzial ciagly miejsca na dysku jest algorytmem optymalnym, nie dajacym sie zaimplementowac w\npraktyce\n[ ] TAK\n[X] NIE","Przydzial ciagly miejsca na dysku charakteryzuje sie fragmentacja zewnetrzna przestrzeni dysku\n[X] TAK\n[ ] NIE","Planowanie zadan (scheduling) ma na celu synchronizowanie dostepu do zasobow\n[ ] TAK\n[X] NIE","Planowanie zadan (scheduling) ma na celu wybor procesu do aktywacji\n[X] TAK\n[ ] NIE","Planowanie zadan (scheduling) ma na celu unikanie blokad\n[ ] TAK\n[X] NIE","Planowanie srednioterminowe okresla kolejnosc kopiowania procesow do pamieci z obszaru\nwymiany\n[X] TAK\n[ ] NIE","Planowanie srednioterminowe wybiera proces do uruchomienia sposrod procesow gotowych\n[X] TAK\n[ ] NIE","Planowanie srednioterminowe okresla procesy, ktore nalezy odblokowac\n[ ] TAK\n[X] NIE","Sekcja krytyczna to technika synchronizacji dostepu do pamieci wspoldzielonej przez procesor\n[ ] TAK\n[X] NIE","Sekcja krytyczna wykorzystywana jest do negocjacji dostepu do semaforow\n[ ] TAK\n[X] NIE","Sekcja krytyczna wykorzystywana jest od ochrony danych przed rownoczesna ich modyfikacja przez\nprocesy wspolbiezne\n[X] TAK\n[ ] NIE","Sygnaly w systemie linux generowane sa wylacznie przez sterowniki urzadzen zewnetrznych\n[ ] TAK\n[X] NIE","Sygnaly w systemie linux nie moga byc ignorowane przez procesy\n[ ] TAK\n[X] NIE","Sygnaly w systemie linux wysylane sa do pojedynczych procesow, grup procesow, procesow\nokreslonego uzytkownika lub do wszystkich procesow\n[X] TAK\n[ ] NIE","Swobodny (zrandomizowany), dostep do pliku polega na wspoldzieleniu otwartych plikow przez\nwiele procesow\n[ ] TAK\n[X] NIE","Swobodny (zrandomizowany), dostep do pliku szereguje dostep wielu procesow do pliku\n[ ] TAK\n[X] NIE","Swobodny (zrandomizowany), dostep do pliku pozwala na wystepowanie plikow nieciaglych, z\nniezaalokowanymi dziurami\n[X] TAK\n[ ] NIE","Stan procesu przechowywany jest w jadrze systemu operacyjnego w obszarze uarea\n[ ] TAK\n[X] NIE","Stan procesu Identyfikuje procesy, ktore nie wymagaja dostepu do urzadzen zewnetrznych\n[ ] TAK\n[X] NIE","Stan procesu okresla, czy procesor jest przydzielony do procesu\n[X] TAK\n[ ] NIE","Stronicowanie na zadanie wymaga tworzenia obrazu pamieci w obszarze wymiany\n[X] TAK\n[ ] NIE","Stronicowanie na zadanie wykorzystuje segmentacje pamieci\n[ ] TAK\n[X] NIE","Stronicowanie na zadanie wlaczane jest na zadanie procesu (przez wywolanie funkcji swapon)\n[ ] TAK\n[X] NIE","Sciezka do pliku to sciezka bezwzgledna okreslajaca polozenie pliku wzgledem katalogu glownego\n[X] TAK\n[ ] NIE","Sciezka do pliku moze byc wzgledna, bezwzgledna lub symboliczna\n[ ] TAK\n[X] NIE","Sciezka do pliku to sciezka symboliczna okreslajaca polozenie pliku wzgledem katalogu domowego\nuzytkownika\n[ ] TAK\n[X] NIE","Warunek postepu w synchronizacji miedzy procesami to zapewnienie, ze dwa procesy nie znajda sie\nw tym samym czasie w sekcji krytycznej\n[ ] TAK\n[X] NIE","Warunek postepu w synchronizacji miedzy procesami to wymaganie, aby proces nie byl usypiany przy\nwejsciu do sekcji krytycznej, gdy nie ma w niej innych procesow\n[X] TAK\n[ ] NIE","Warunek postepu w synchronizacji miedzy procesami zapewnia, ze proces nie jest wywlaszczany, gdy\nznajduje sie w sekcji krytycznej\n[ ] TAK\n[X] NIE","Warunek wykluczania w synchronizacji miedzy procesami zapewnia, ze proces nie jest wywlaszczany,\ngdy znajduje sie w sekcji krytycznej\n[ ] TAK\n[X] NIE","Warunek wykluczania w synchronizacji miedzy procesami to zapewnienie, ze dwa procesy nie znajda\nsie w tym samym czasie w sekcji krytycznej\n[X] TAK\n[ ] NIE","Warunek wykluczania w synchronizacji miedzy procesami wymaga, aby proces mial dostep do sekcji\nkrytycznej, gdy nie przebywa w niej inny\n[ ] TAK\n[ ] NIE"
+        // KOLEJNE
+
+]
+
+
+console.log("dupa")
+var fuse = new Fuse(questions, {
+includeScore: true,
+findAllMatches: true,
+threshold: 0.7,
+ignoreLocation: true,
+useExtendedSearch: false,
+});
+console.log("xdws")
+
+function handleQuestion(el) {
+function questionText() {
+    return document.querySelector('#question').value;
+}
+
+
+
+var question_text = questionText();
+
+console.log('question text:', question_text);
+
+
+var results_from_question = fuse.search(question_text);
+
+console.log('fuzzy search results from the question:', results_from_question);
+
+if((!results_from_question || results_from_question.length == 0)) {
+console.log('Nothing matched for element ', el);
+return '';
+}
+
+var refIndices1 = results_from_question.map(x => x.refIndex);
+
+if(results_from_question.length > 10)
+results_from_question.length = 10;
+
+
+var results = results_from_question;
+
+results.sort((x,y) => x.score - y.score);
+
+if(results.length > 10)
+results.length = 10;
+
+function processText(text) {
+return text
+    .replace(/</g, '<')
+    .replace(/>/g, '>')
+    .replace(/\n/g, '<br />')
+    .replace(/_(.)/g, '<sub>$1</sub>')
+    .replace(/\^(.)/g, '<sup>$1</sup>')
+}
+
+var text = results
+.map(result => "" + Math.round((1-result.score)*10000)/100 + "%: <br />" + processText(result.item))
+.join('<br /><br />');
+
+return text
+}
+
+var found = [...document.querySelectorAll('#question')].map(questionElement => handleQuestion(questionElement))
+
+var text;
+if(found.length == 0 || found.join('') == '') {
+text = "<b>Nie znaleziono pytań :/</b>"
+} else if(found.length == 1) {
+text = found[0]
+} else {
+text =
+"<b>Znaleziono " + found.length + (found.length < 5 ? " pytania." : " pytań.") + "</b>"
++ found
+    .map((v, i) => "<br /><br /><b>====== PYTANIE " + (i + 1) + " ======</b><br /><br />" + v)
+    .join('')
+
+}
+
+var d=document.createElement('div')
+d.style='border:1px solid black;padding: 10px; margin: 10px'
+d.class='mb-3'
+d.innerHTML = text;
+document.querySelector('#answer-list').appendChild(d)
+}
+
+const clearButton = document.querySelector("#clear");
+
+clearButton.addEventListener("click", clearAnswers);
+function clearAnswers(){
+    document.querySelector('#answer-list').innerHTML = ''
+}
+
+
+
+</script>
+
+</html>
